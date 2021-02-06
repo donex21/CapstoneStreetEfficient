@@ -1,0 +1,70 @@
+.navBarItems{
+    background: #3981E5;
+    height: 60px;
+}
+.headerLogo{
+    padding-top: 10px;
+    float: left;
+    margin-left: 50px;
+}
+.headerMenu{
+    float: right;
+}
+.headerMenuUl{
+    li{ 
+        margin-top: 10px;
+        float: left;
+        display: block;
+        padding: 5px 16px;
+        font-size: 17px;  
+        cursor: pointer; 
+    }
+    .headerLink{
+        text-decoration: none;
+        color: white;
+    }
+}
+
+.headerMenuUl li:hover{
+    background: #97bcf0;
+    color: #fff;
+}
+
+.navUser{
+ background-color: red;
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.navUser:focus{
+    outline: none;
+}
+.navUser:hover{
+    background: rgba(255, 0,0, 0.5)
+}
+
+.submenu-employees{
+    display: none;
+}
+
+
+.headerMenuUl li:hover .submenu-employees{
+    width: 120px;
+    display: block;
+    position: absolute;
+    background: #3981E5;
+    margin-left: -15px;
+    border-radius: 5px;
+
+}
+
+.headerMenuUl li:hover .submenu-employees ul{
+    display: block;
+}
+
