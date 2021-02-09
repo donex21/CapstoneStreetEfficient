@@ -1,11 +1,9 @@
 const initstate = {
-    courierError:null,
     courierId:null,
-    userEmail:null,
-    userBranch:null,
+    courierError:null,
     userError:null,
-    userID:null,
-    newuser: false
+    newuser: false,
+    newPassword: false
 }
 
 const courierReducer = (state = initstate, action) => {
@@ -14,7 +12,6 @@ const courierReducer = (state = initstate, action) => {
             console.log('courier error');
             return {
                 ...state,
-                courierId:null,
                 courierError: 'INVALID COURIER'
             }
 
@@ -32,22 +29,12 @@ const courierReducer = (state = initstate, action) => {
                 ...state,
                 userError: 'INVALID EMAIL/PASSWORD'
             }
-        case 'LOGIN_ERROR_A':
-            console.log('LOGIN_ERROR_A');
-            return {
-                ...state,
-                userID: action.userid,
-                userError: 'INVALID EMAIL/PASSWORD'
-            }
 
         case 'LOGIN_SUCCESS':
             console.log('LOGIN_SUCCESS');
             return {
                 ...state,
                 userError: null,
-                userEmail : action.useremail,
-                userBranch : action.userbranch,
-                userID: action.userid
             }
 
         case 'NEW_USER_LOGIN':
@@ -55,11 +42,30 @@ const courierReducer = (state = initstate, action) => {
             return {
                 ...state,
                 userError: null,
-                userEmail : action.useremail,
-                userBranch : null,
-                userID: action.userid,
                 newuser: true
             }
+
+        case 'SIGNOUT_SUCCESS':
+            console.log('signout success');
+            return{
+                ...state,
+                newuser: false
+            } 
+
+        case 'UPDATE_NEWPASSWORD_SUCCESS':
+            console.log('UPDATE_NEWPASSWORD_SUCCESS');
+            return{
+                ...state,
+                newuser: false,
+                newPassword: true
+            } 
+
+        case 'UPDATE_NEWPASSWORD_ERROR':
+            console.log('UPDATE_NEWPASSWORD_ERROR');
+            return{
+                ...state,
+                newuser: true
+            } 
 
         default:
             return state

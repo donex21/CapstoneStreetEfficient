@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {signInAuth} from '../store/actions/courierAction';
-// import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 
 function UserLogin(props) {
 
-    // const history = useHistory();
     const [emailPwd, setEmailPwd] = useState(
         {
             email: '',
@@ -22,6 +21,13 @@ function UserLogin(props) {
         props.signInAuth(emailPwd);
     }
 
+    const{newUser, auth, userError} = props
+    if(auth.uid && newUser){
+        return <Redirect to='/inputNewPassword'/>
+    }else if (auth.uid){
+        return <Redirect to='/'/>
+    }
+    
     return (
         <div className = "login-main">
              <div className = "login-section">
@@ -41,7 +47,10 @@ function UserLogin(props) {
                         name="password" 
                         value = {emailPwd.password}
                         onChange = {handleOnchange}
-                    />     
+                    />   
+                    <div className = "Errormessage">
+                       { userError ? <span> {userError} </span> : <span> </span> }
+                    </div>  
                     
                     <button type="submit">LOGIN</button>
                     {/* <h3 className = "back-to-courier" onClick = { () => history.push('/')}> &lt; Back </h3> */}
@@ -55,6 +64,9 @@ function UserLogin(props) {
 const mapStateToProps = (state) => {
     console.log(state); 
     return {
+        newUser: state.courier.newuser,
+        userError: state.courier.userError,
+        auth: state.firebase.auth
     };
   };
 
