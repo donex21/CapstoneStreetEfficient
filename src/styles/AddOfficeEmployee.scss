@@ -1,83 +1,103 @@
+.modal-wrapper {
+  position: absolute;
+  background: #fff;
+  width: 80%;
+  height: 100vh;
+  max-width: 800px;
+  margin: 1rem auto;
+  left: 10%;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+}
 
-  
-  .modal-wrapper {
-    position: absolute;
-    background: #fff;
-    width: 80%;
-    height: 100vh;
-    max-width: 800px;
-    margin: 1rem auto;
-    left: 10%;
-    border-radius: 10px;
-    transition: all .5s ease;
-  }
-  
-  .modal-header {
-    background: #3981E5;
-    color: white;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .modal-header span {
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .modal-content {
-    padding: 10px 10px;
-  }
-  
-  .modal-body {
-    margin-bottom: 1rem;
-  }
-  .addStaffForm{
-      padding: 1rem 2rem;
-      display: grid;
-      grid-template-columns: auto auto;
-      place-items: center;
-  }
-  .modalstaff-inputfield input{
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 16px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
+.modal-header {
+  background: #3981e5;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .modalstaff-inputfield select{
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 16px 0;
-    display: inline-block;
-    background: #f1f1f1;
-  }
+.modal-header span {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 
-  .modalstaff-submit{
-    grid-column: 1 / span 2;
-    grid-row: 2;
-    
-  }
-  .modalstaff-submit button{
-        margin-top: 1.5rem;
-        padding: 1rem 10rem;
-        border-radius: 1rem ;
-         background: #3981E5;
-         border: none;
-         text-decoration: none;
-         text-align: center;
-         color: white;
-         font-size: 1.5rem;
-         outline: none;
-         cursor: pointer;
-  }
-  
-  .modalstaff-submit button:hover{
-    opacity: .7;
-  }
-  
-  
+.modal-content {
+  padding: 10px 10px;
+}
+
+.add-employee-form {
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  place-items: center;
+}
+
+.employee-email-container {
+  margin: 10px;
+}
+.employee-email-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 16px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.employee-contactNumber-container {
+  margin: 10px;
+}
+
+.employee-contactNumber-container input,
+.employee-contactNumber-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 16px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.react-datepicker__input-container {
+  width: inherit;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.mySelect__value-container {
+  height: 35px;
+}
+
+.employeestatus-switch {
+  margin-right: 20px;
+}
+
+.status-swtich-container {
+  margin-top: 20px;
+}
+
+.modal-submit-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.modal-submit-container button {
+  background: rgb(50, 129, 229);
+  width: 50%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-submit-container button:hover {
+  opacity: 0.7;
+}

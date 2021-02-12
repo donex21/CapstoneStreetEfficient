@@ -86,7 +86,10 @@
       const firebase = getFirebase();
       firebase.auth().signOut().then(() => {
         dispatch({ type: 'SIGNOUT_SUCCESS' })
-      });
+      }).catch(() => {
+        // An error happened.
+    
+    });    
     }
   }
 
@@ -110,4 +113,24 @@ export const updateNewPassword = (newPassword) => {
             dispatch({type: 'UPDATE_NEWPASSWORD_ERROR'})
           });
     }
+}
+
+export const getCourierID = (authID) => {
+  return (dispatch, getState, {getFirebase}) => {
+    const firestore = getFirebase().firestore();
+
+    const docRef = firestore.collection("Office_Employees").doc(authID);
+      docRef.get().then((doc) => {
+          if (doc.exists) {
+              //console.log("Document data:", doc.data());
+              var cour_id = doc.data().courier_id;
+              var cour_branch = doc.data().branch;
+              dispatch({type: 'GET_COURIER_ID_SUCCESS', cour_id, cour_branch})
+          }
+      }).catch(() => {
+          // An error happened.
+      });
+
+    
+  }
 }

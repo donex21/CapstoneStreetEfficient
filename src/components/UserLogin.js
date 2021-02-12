@@ -62,7 +62,7 @@ function UserLogin(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state); 
+    //console.log(state); 
     return {
         newUser: state.courier.newuser,
         userError: state.courier.userError,

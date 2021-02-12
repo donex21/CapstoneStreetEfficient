@@ -43,7 +43,7 @@ function CourierLogin(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    //console.log(state);
     const courier = state.courier.courierId;
     return {
         courier,

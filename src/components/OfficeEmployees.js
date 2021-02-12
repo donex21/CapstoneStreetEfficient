@@ -11,7 +11,7 @@ function OfficeEmployees() {
             <AddOfficeEmployee show={show} close={closeModalHandler} />
             
             <div>
-                <h1> Office Employees </h1>
+                Office Employees 
             </div>
         </>
     )

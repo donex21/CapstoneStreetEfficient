@@ -1,21 +1,21 @@
 import React, {useState} from 'react'
-import fbConfig from '../config/fbConfig'
+//import fbConfig from '../config/fbConfig'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {updateNewPassword} from '../store/actions/courierAction'
 
 function InputNewPwd(props) {
-    const logout= () =>{
-        fbConfig.auth().signOut();
-        window.location.href = '/'
-    }
+    // const logout= () =>{
+    //     fbConfig.auth().signOut();
+    //     window.location.href = '/'
+    // }
     const [newPassword, setNewPassword] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
         props.updateNewPassword(newPassword);
     }
-    const {passwordSucess} = props;
-    if(passwordSucess){
+    const {passwordSuccess} = props;
+    if(passwordSuccess){
         return <Redirect to='/'/>
     }
     return (
@@ -34,14 +34,14 @@ function InputNewPwd(props) {
                    
                 </form>
              </div>
-             <button onClick={logout}>Logout</button>
+             {/* <button onClick={logout}>Logout</button> */}
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return{
-        passwordSucess: state.courier.newPassword
+        passwordSuccess: state.courier.newPassword
     }
 };
 

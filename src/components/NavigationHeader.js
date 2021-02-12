@@ -1,11 +1,15 @@
-import React, {useState, } from 'react'
+import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import { signOut }  from '../store/actions/courierAction'
+//import { signOut }  from '../store/actions/courierAction'
 import { connect } from 'react-redux';
+import fire from '../config/fbConfig'
 
 function NavigatioHeader(props) {
+
+    const { auth } = props;
+   
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -16,14 +20,20 @@ function NavigatioHeader(props) {
         setAnchorEl(null);
     };
 
-    const { auth } = props;
+    
     let emailAdd = auth.email;
     let username = emailAdd.split("@");
     let jobtitle = auth.displayName;
 
-    const logout = () =>{
-        setAnchorEl(null)  
-        props.signOut()
+    // const logout = (e) =>{
+    //     e.preventDefault();
+    //     props.signOut();
+    //     setAnchorEl(null);
+    //     window.location.href = '/';
+    // }
+
+    const logout= () =>{
+        fire.auth().signOut();
         window.location.href = '/'
     }
 
@@ -38,7 +48,7 @@ function NavigatioHeader(props) {
             <ul className = "headerMenuUl">
                 <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/home"> Home </NavLink> </li>
                 <li className = "headerLink"> Employees
-                    <div className = {jobtitle === "manager" ? `submenu-employees` : `no-submenu-employees`}>
+                    <div className = {jobtitle === "Manager" ? `submenu-employees` : `no-submenu-employees`}>
                         <ul>
                             <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/officeEmployees"> Office Employees </NavLink></li>
                             <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/dispatchRiders"> Dispatch Riders </NavLink></li>
@@ -68,7 +78,7 @@ function NavigatioHeader(props) {
 }
 
 const mapStateToProps = (state) =>{
-    console.log(state)
+    //console.log(state)
     return{
         auth: state.firebase.auth
     }
@@ -76,7 +86,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        signOut: () => dispatch(signOut())
+        //signOut: () => dispatch(signOut()),
     }
 }
 
