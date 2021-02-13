@@ -1,14 +1,8 @@
 import React, {useState} from 'react'
-//import fbConfig from '../config/fbConfig'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {updateNewPassword} from '../store/actions/courierAction'
 
 function InputNewPwd(props) {
-    // const logout= () =>{
-    //     fbConfig.auth().signOut();
-    //     window.location.href = '/'
-    // }
     const [newPassword, setNewPassword] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,7 +10,7 @@ function InputNewPwd(props) {
     }
     const {passwordSuccess} = props;
     if(passwordSuccess){
-        return <Redirect to='/'/>
+        return window.location.href = '/';
     }
     return (
         <div className = "login-main">
@@ -34,7 +28,6 @@ function InputNewPwd(props) {
                    
                 </form>
              </div>
-             {/* <button onClick={logout}>Logout</button> */}
         </div>
     )
 }

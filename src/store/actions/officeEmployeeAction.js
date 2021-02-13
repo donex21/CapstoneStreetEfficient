@@ -23,12 +23,13 @@ export const addOfficeEmployee = (officeEmployeeSignup) => {
                   ...officeEmployeeSignup,
                   id : resp.user.uid,
                   password: password
-              });
-            }).then( () => {
-                dispatch({type: 'ADD_OFFICE_EMPLOYEE_SUCCESS' });
-            }).catch( (err) => {
-                dispatch( {type: 'ADD_OFFICE_EMPLOYEE_ERROR', err});
-        }).catch( (err) => {
+              }).then(() => {
+                    dispatch({type: 'ADD_OFFICE_EMPLOYEE_SUCCESS' });
+                }).catch( (err) => {
+                    dispatch( {type: 'ADD_OFFICE_EMPLOYEE_ERROR', err});
+            });
+            
+         }).catch( (err) => {
             dispatch( {type: 'ADD_OFFICE_EMPLOYEE_ERROR', err});;
         })
   

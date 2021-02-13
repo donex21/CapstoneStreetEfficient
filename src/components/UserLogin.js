@@ -5,10 +5,13 @@ import { Redirect } from 'react-router-dom'
 
 function UserLogin(props) {
 
+    const{newUser, auth, userError, courier_id} = props
+
     const [emailPwd, setEmailPwd] = useState(
         {
             email: '',
-            password: ''
+            password: '',
+            courier_id: courier_id
         }
     );
 
@@ -21,7 +24,6 @@ function UserLogin(props) {
         props.signInAuth(emailPwd);
     }
 
-    const{newUser, auth, userError} = props
     if(auth.uid && newUser){
         return <Redirect to='/inputNewPassword'/>
     }else if (auth.uid){
@@ -66,6 +68,7 @@ const mapStateToProps = (state) => {
     return {
         newUser: state.courier.newuser,
         userError: state.courier.userError,
+        courier_id: state.courier.courierId,
         auth: state.firebase.auth
     };
   };

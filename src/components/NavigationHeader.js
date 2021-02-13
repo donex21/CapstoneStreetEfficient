@@ -23,7 +23,8 @@ function NavigatioHeader(props) {
     
     let emailAdd = auth.email;
     let username = emailAdd.split("@");
-    let jobtitle = auth.displayName;
+    let displayName = auth.displayName;
+    let jobtitle = displayName.split("@");
 
     // const logout = (e) =>{
     //     e.preventDefault();
@@ -48,7 +49,7 @@ function NavigatioHeader(props) {
             <ul className = "headerMenuUl">
                 <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/home"> Home </NavLink> </li>
                 <li className = "headerLink"> Employees
-                    <div className = {jobtitle === "Manager" ? `submenu-employees` : `no-submenu-employees`}>
+                    <div className = {jobtitle[0] === "Manager" ? `submenu-employees` : `no-submenu-employees`}>
                         <ul>
                             <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/officeEmployees"> Office Employees </NavLink></li>
                             <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/dispatchRiders"> Dispatch Riders </NavLink></li>

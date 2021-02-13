@@ -13,8 +13,11 @@ import { connect } from 'react-redux'
 
 toast.configure();
 const AddOfficeEmployee = (props) => {
-    const {show, close, branches, courierID, addOffice_Emp_Error} = props
+    const {show, close, branches, courierID, addOffice_Emp_Error, auth} = props
     const [checked, setChecked] = useState(false)//for status
+    let displayName = auth.displayName;
+    let encodedBY = displayName.split("@");
+
 
     const [officeEmployeeSignup, setOfficeEmployeeSignup] = useState({
         email : '',
@@ -28,13 +31,14 @@ const AddOfficeEmployee = (props) => {
         branch: '',
         jobtitle: 'Office Clerk',
         status: 'inactive',
-        courier_id: courierID
+        courier_id: courierID,
+        encodedBY: encodedBY[1],
     });  
 
     useEffect(() => {
         checked ? setOfficeEmployeeSignup({...officeEmployeeSignup, status: 'active'}) : setOfficeEmployeeSignup({...officeEmployeeSignup, status: 'inactive'});
         // eslint-disable-next-line
-    }, [checked])
+    }, [checked]);
 
     const handleOnChange = (e) =>{
         setOfficeEmployeeSignup({...officeEmployeeSignup, [e.target.name]: e.target.value})
@@ -46,7 +50,7 @@ const AddOfficeEmployee = (props) => {
         console.log(officeEmployeeSignup);
         props.addOfficeEmployee(officeEmployeeSignup);
 
-        if (addOffice_Emp_Error){
+        if (!addOffice_Emp_Error){
             setOfficeEmployeeSignup({
                 email : '',
                 fname : '',
@@ -60,10 +64,11 @@ const AddOfficeEmployee = (props) => {
                 jobtitle: 'Office Clerk',
                 status: 'inactive',
                 courier_id: courierID
-            })
+            });
+            setChecked(false);
         }
         
-        addOffice_Emp_Error ? toast.success('Office Employee Sucessfully Saved') : toast.error('Invalid Email/Password or Email Already Exist ');
+        addOffice_Emp_Error ? toast.error('Invalid Email/Password or Email Already Exist ') : toast.success('Office Employee Sucessfully Saved');
     }
    
     const options = branches && Object.keys(branches).map(function (i) {
@@ -233,7 +238,8 @@ const mapStateToProps = (state) =>{
     return{
         branches: state.firestore.data.Branch,
         courierID: state.courier.courierId,
-        addOffice_Emp_Error: state.officeEmployees.addOffice_Emp_Error
+        addOffice_Emp_Error: state.officeEmployees.addOffice_Emp_Error, 
+        auth: state.firebase.auth
     }
 }
 

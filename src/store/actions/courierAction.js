@@ -37,27 +37,34 @@
             var users_email = [];
             var users_password = [];
             var users_jobtitle = [];
+            var users_fname = [];
+            var users_lname =[];
 
           firestore.collection("Office_Employees")
           .where("email", "==", emailPwd.email)
           .where("password", "==", emailPwd.password)
           .where("status", "==", "active")
+          .where("courier_id", "==", emailPwd.courier_id)
           .get() 
           .then((querySnapshot) => {
               if(!querySnapshot.empty){
                     querySnapshot.forEach((doc) => {
                         users_email.push(doc.data().email);
                         users_password.push(doc.data().password);
-                        users_jobtitle.push(doc.data().jobtitle)
+                        users_jobtitle.push(doc.data().jobtitle);
+                        users_fname.push(doc.data().fname);
+                        users_lname.push(doc.data().lname);
                     });
    
                     let useremail = users_email[0];
                     let userpassword = users_password[0];
                     let userjobtitle = users_jobtitle[0];
+                    let userfname = users_fname[0];
+                    let userlname = users_lname[0];
 
                         firebase.auth().signInWithEmailAndPassword(useremail, userpassword)
                         .then(() => {
-                            firebase.auth().currentUser.updateProfile({displayName: userjobtitle});
+                            firebase.auth().currentUser.updateProfile({displayName: userjobtitle + '@'+ userfname + ' ' + userlname});
                             if(userpassword === 'admin123')
                             {
                                 dispatch({ type: 'NEW_USER_LOGIN'});
