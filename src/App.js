@@ -15,6 +15,7 @@ import RidersMap from './components/RidersMap'
 import OfficeEmployees from './components/OfficeEmployees'
 import DispatchRiders from './components/DispatchRiders'
 import UserProfile from './components/UserProfile'
+import AddDispatchRider from './components/AddDispatchRider'
 
 export class App extends Component {
   
@@ -35,6 +36,7 @@ export class App extends Component {
             <Route exact path = '/officeEmployees' component = {OfficeEmployees} />
             <Route exact path = '/dispatchRiders' component = {DispatchRiders} />
             <Route exact path = '/userProfile' component = {UserProfile} />
+            <Route exact path = '/addDispatchRiders' component = {AddDispatchRider} />
           </Switch>
   
           <div className = "footer">

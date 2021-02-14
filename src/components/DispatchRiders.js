@@ -1,10 +1,14 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 
-function DispatchRiders() {
+const DispatchRiders = () => {
+    const history  = useHistory();
+    
+
     return (
         <div>
              Dispatch Riders  
-            <button className="btn-primary">Add Dispatch Rider</button>
+            <button className="btn-primary" onClick = {() => history.push('/addDispatchRiders')}>Add Dispatch Rider</button>
         </div>
     )
 }

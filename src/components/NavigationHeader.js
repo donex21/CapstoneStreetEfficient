@@ -42,7 +42,7 @@ function NavigatioHeader(props) {
 
     return (
         <nav className = "navBarItems">
-        <div className = "headerLogo">
+        <div className = "headerLogo" onClick = {() => window.location.href = '/'}>
             <img src="/images/navlogo.png" alt= "logo" height = "50px" width = "300px"/>
         </div>
         <div className = "headerMenu">

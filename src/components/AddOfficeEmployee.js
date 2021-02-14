@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {addOfficeEmployee} from '../store/actions/officeEmployeeAction'
-import { toast } from 'react-toastify'
 
-import 'react-toastify/dist/ReactToastify.css'
 import '../styles/AddOfficeEmployee.scss'
 
 import DatePicker from 'react-datepicker'
@@ -11,7 +9,7 @@ import Select from 'react-select'
 import Switch from 'react-switch'
 import { connect } from 'react-redux'
 
-toast.configure();
+
 const AddOfficeEmployee = (props) => {
     const {show, close, branches, courierID, addOffice_Emp_Error, auth} = props
     const [checked, setChecked] = useState(false)//for status
@@ -40,16 +38,7 @@ const AddOfficeEmployee = (props) => {
         // eslint-disable-next-line
     }, [checked]);
 
-    const handleOnChange = (e) =>{
-        setOfficeEmployeeSignup({...officeEmployeeSignup, [e.target.name]: e.target.value})
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        console.log(officeEmployeeSignup);
-        props.addOfficeEmployee(officeEmployeeSignup);
-
+    useEffect(() => {
         if (!addOffice_Emp_Error){
             setOfficeEmployeeSignup({
                 email : '',
@@ -63,12 +52,21 @@ const AddOfficeEmployee = (props) => {
                 branch: '',
                 jobtitle: 'Office Clerk',
                 status: 'inactive',
-                courier_id: courierID
+                courier_id: courierID,
+                encodedBY: encodedBY[1],
             });
             setChecked(false);
-        }
-        
-        addOffice_Emp_Error ? toast.error('Invalid Email/Password or Email Already Exist ') : toast.success('Office Employee Sucessfully Saved');
+        } // eslint-disable-next-line
+    }, [addOffice_Emp_Error])
+
+    const handleOnChange = (e) =>{
+        setOfficeEmployeeSignup({...officeEmployeeSignup, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(officeEmployeeSignup);
+        props.addOfficeEmployee(officeEmployeeSignup)          
     }
    
     const options = branches && Object.keys(branches).map(function (i) {
@@ -193,7 +191,7 @@ const AddOfficeEmployee = (props) => {
                             maxDate = {new Date()}
                         />
 
-                        <label>Branch</label>
+                        <label> Company Branch</label>
                         <Select 
                             classNamePrefix="mySelect" 
                             options={options}
