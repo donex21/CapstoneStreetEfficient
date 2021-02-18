@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {addOfficeEmployee} from '../store/actions/officeEmployeeAction'
+import { activeTextSwitch, inactiveTextSwitch } from './CustomsStyles';
 
 import '../styles/AddOfficeEmployee.scss'
 
@@ -76,25 +77,6 @@ const AddOfficeEmployee = (props) => {
         }
       });
      
-    const activeTextSwitch = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-        fontSize: 15,
-        color: "#fff",
-        paddingLeft: 5
-    }
-
-    const inactiveTextSwitch = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-        fontSize: 15,
-        color: "#fff",
-        paddingRight: 20
-    }
     return (
         <div className="modal-wrapper"
             style={{
@@ -181,10 +163,11 @@ const AddOfficeEmployee = (props) => {
 
                         <label >Bith Date</label>
                         <DatePicker
-                            className = "datepicker-birthdate"
+                           // className = "datepicker-birthdate"
                             selected = {officeEmployeeSignup.birthdate}
                             onChange = {e =>  setOfficeEmployeeSignup({...officeEmployeeSignup, birthdate: e})}
                             dateFormat = 'MM/dd/yyyy'
+                            placeholderText = "Birthdate"
                             isClearable
                             showYearDropdown
                             scrollableYearDropdown

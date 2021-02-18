@@ -11,7 +11,6 @@ export const addOfficeEmployee = (officeEmployeeSignup) => {
       
       let authWorkerApp = getFirebaseApp('auth-worker');
   
-        //let authWorkerApp = firebase.initializeApp(firebase.app().options, 'auth-employee');
         let authWorkerAuth = firebase.auth(authWorkerApp);
         authWorkerAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
 

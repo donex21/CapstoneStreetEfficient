@@ -1,0 +1,114 @@
+.addDR-container {
+  margin-bottom: 100px;
+  width: 50%;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+@media screen and (max-width: 800px) {
+  .addDR-container {
+    width: 100%;
+    margin-left: 10px;
+  }
+
+  .addDR-inputs-name {
+    display: flex;
+    flex-flow: wrap;
+  }
+}
+
+.addDR-header {
+  padding: 10px 20px 10px 20px;
+  margin: 20px 0px;
+  background: #3981e5;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.addDR-form h2 {
+  padding: 10px;
+}
+
+.addDR-form div {
+  margin-bottom: 10px;
+}
+
+.addDR-inputs-name {
+  display: flex;
+}
+
+.addDR-inputs-name input,
+.addDR-input-email input,
+.addDR-input-address input,
+.addDR-inputs-contact input,
+.addDR-inputs-creds input,
+.addDR-inputs-creds select {
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: none;
+  background: rgba(57, 129, 229, 0.2);
+}
+
+.addDR-input-email input,
+.addDR-input-address input {
+  width: 100%;
+}
+
+.addDR-inputs-contact,
+.addDR-inputs-gender,
+.addDR-input-branch {
+  display: flex;
+}
+
+.addDR-inputs-contact input {
+  width: 80%;
+}
+
+.addDR-inputs-contact {
+  justify-content: flex-start;
+}
+
+.addDR-inputs-gender select,
+.datepicker-birthdate {
+  width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: none;
+  background: rgba(57, 129, 229, 0.2);
+}
+
+.datepicker-birthdate,
+.label-date {
+  margin-left: 65%;
+}
+
+.addDR-inputs-gender {
+  justify-content: flex-start;
+}
+
+.mySelect {
+  width: 235px;
+}
+
+.addDR-switch {
+  margin-left: 65px;
+}
+
+.addDR-inputs-creds input {
+  width: 100%;
+}
+
+.btn-submit {
+  margin-top: 20px;
+}
+
+.btn-submit button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding: 10px 0;
+}
