@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom';
 import firebase from '../config/fbConfig'
 import { activeTextSwitch, inactiveTextSwitch, customStyles } from './CustomsStyles';
-import { addDispatchRiderInFirebase } from '../store/actions/dispatchRiderAction';
+import { addDispatchRiderInFirebase, SelectDesignateBarangay } from '../store/actions/dispatchRiderAction';
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -10,10 +11,13 @@ import Switch from 'react-switch'
 import { connect } from 'react-redux'
 
 const AddDispatchRider = (props) => {
-    const {branches, courierID, auth, add_dispatchrider_Error} = props
+    const {branches, courierID, auth, barangays, add_dispatchrider_Error} = props
     const [checked, setChecked] = useState(false)//for status
     let displayName = auth.displayName;
     let encodedBY = displayName.split("@");
+    const history  = useHistory();
+
+   
     const [addDispatchRider, setAddDispatchRider] = useState({
         fname : '',
         mname :'',
@@ -26,6 +30,7 @@ const AddDispatchRider = (props) => {
         gender: 'Male',
         branch: '',
         status: 'inactive',
+        designateBarangay: '',
         courier_id: courierID,
         encodedBY: encodedBY[1],
         vehicle_type: 'Motorcycle',
@@ -41,32 +46,33 @@ const AddDispatchRider = (props) => {
         // eslint-disable-next-line
     }, [checked]);
 
-    useEffect(() => {
-        if (!add_dispatchrider_Error){
-            setAddDispatchRider({
-                fname : '',
-                mname :'',
-                lname :'',
-                email : '',
-                address: '',
-                contactNumber: '',
-                emerg_number: '',
-                birthdate: null,
-                gender: 'Male',
-                branch: '',
-                status: 'inactive',
-                courier_id: courierID,
-                encodedBY: encodedBY[1],
-                vehicle_type: 'Motorcycle',
-                cR : null,
-                oR: null,
-                license: null,
-                writtenExam: null,
-                actualAssessment: null
-            });
-            setChecked(false);
-        } // eslint-disable-next-line
-    }, [add_dispatchrider_Error])
+    // useEffect(() => {
+    //     if (!add_dispatchrider_Error){
+    //         setAddDispatchRider({
+    //             fname : '',
+    //             mname :'',
+    //             lname :'',
+    //             email : '',
+    //             address: '',
+    //             contactNumber: '',
+    //             emerg_number: '',
+    //             birthdate: null,
+    //             gender: 'Male',
+    //             branch: '',
+    //             status: 'inactive',
+    //             courier_id: courierID,
+    //             encodedBY: encodedBY[1],
+    //             vehicle_type: 'Motorcycle',
+    //             cR : null,
+    //             oR: null,
+    //             license: null,
+    //             writtenExam: null,
+    //             actualAssessment: null
+    //         });
+    //         setChecked(false);
+    //         imageInputRef.current.value = null;
+    //     } // eslint-disable-next-line
+    // }, [add_dispatchrider_Error])
 
     const handleOnChange = (e) =>{
         setAddDispatchRider({...addDispatchRider, [e.target.name]: e.target.value})
@@ -84,17 +90,66 @@ const AddDispatchRider = (props) => {
         e.preventDefault();
         console.log(addDispatchRider);
         props.addDispatchRiderInFirebase(addDispatchRider);
+
+                setAddDispatchRider({
+                fname : '',
+                mname :'',
+                lname :'',
+                email : '',
+                address: '',
+                contactNumber: '',
+                emerg_number: '',
+                birthdate: null,
+                gender: 'Male',
+                branch: '',
+                status: 'inactive',
+                designateBarangay: '',
+                courier_id: courierID,
+                encodedBY: encodedBY[1],
+                vehicle_type: 'Motorcycle',
+                cR : null,
+                oR: null,
+                license: null,
+                writtenExam: null,
+                actualAssessment: null
+            });
+            setChecked(false);
+
+            var inputElements = document.getElementsByTagName('input');
+
+            for (var i=0; i < inputElements.length; i++) {
+                if (inputElements[i].type == 'file') {
+                    inputElements[i].value = '';
+                }
+            }
     }
 
     const options = branches && Object.keys(branches).map(function (i) {
         return {
             value: branches[i].branch_name,
-            label: branches[i].branch_name
+            label: branches[i].branch_name,
+            cityID: branches[i].city_id
         }
       });
 
+    const onSelectChange  = (e) =>{
+        setAddDispatchRider({...addDispatchRider, branch: e.value});
+        props.SelectDesignateBarangay(e.cityID)
+    }
+    var nobarangay = true;
+    var optionBarangay;
 
-    
+    if(barangays){
+        optionBarangay = barangays && Object.keys(barangays).map(function (i) {
+            return {
+                value: barangays[i].brgyname,
+                label: barangays[i].brgyname
+            }
+        });
+        nobarangay  = false;
+    }
+  
+      
     return (
         <div className = "addDR-container">
            <div className = "addDR-header">
@@ -213,7 +268,7 @@ const AddDispatchRider = (props) => {
                                     classNamePrefix="mySelect"                                     
                                     placeholder = "Choose company branch"    
                                     value =  {options && options.find(obj => obj.value === addDispatchRider.branch)}
-                                    onChange =  {e => setAddDispatchRider({...addDispatchRider, branch: e.value})}                     
+                                    onChange = {onSelectChange}                  
                                     isSearchable
                                     autoFocus
                                     maxMenuHeight = {250}
@@ -231,6 +286,25 @@ const AddDispatchRider = (props) => {
                                     width = {90}
                                     height = {25}
                                 />
+                            </div>
+                        </div>
+                        <div>
+                            <div className = "mySelect">
+                                <label> Designate Barangay</label>
+                                <Select 
+                                    styles={customStyles}
+                                    options={optionBarangay}
+                                    classNamePrefix="mySelect"                                     
+                                    placeholder = "Choose designate Barangay"    
+                                    value =  {optionBarangay && optionBarangay.find(obj => obj.value === addDispatchRider.designateBarangay)}
+                                    onChange = {e => setAddDispatchRider({...addDispatchRider, designateBarangay: e.value})}                   
+                                    isSearchable
+                                    autoFocus
+                                    maxMenuHeight = {250}
+                                />
+                                 <div className = "Errormessage">
+                                    { nobarangay ? <span> Select Warehouse Branch First! </span> : <span> </span> }
+                                </div>  
                             </div>
                         </div>
                    </div>
@@ -252,7 +326,8 @@ const AddDispatchRider = (props) => {
                                 <input type="file" 
                                     name="actualAssessment"                        
                                     required    
-                                    onChange ={handleCredsOnChange}                        
+                                    onChange ={handleCredsOnChange}   
+                                                      
                                 />
                              </div>
                       
@@ -262,15 +337,17 @@ const AddDispatchRider = (props) => {
                                 <input type="file" 
                                     name="writtenExam"                        
                                     required       
-                                    onChange = {handleCredsOnChange}                     
+                                    onChange = {handleCredsOnChange}   
+                                                     
                                 /> 
                             </div>
                              <div>
                                 <label> License: </label>  
-                                <input type="file" 
+                                    <input type="file" 
                                     name="license"                        
                                     required   
-                                    onChange = {handleCredsOnChange}                             
+                                    onChange = {handleCredsOnChange}   
+                                                              
                                 />
                              </div>
                         
@@ -279,7 +356,7 @@ const AddDispatchRider = (props) => {
                                 <input type="file" 
                                     name="oR"                        
                                     required 
-                                    onChange = {handleCredsOnChange}                               
+                                    onChange = {handleCredsOnChange}                                                                   
                                 /> 
                             </div>
                              <div>
@@ -287,7 +364,7 @@ const AddDispatchRider = (props) => {
                                 <input type="file" 
                                     name="cR"                        
                                     required   
-                                    onChange = {handleCredsOnChange}                             
+                                    onChange = {handleCredsOnChange}                                                             
                                 />
                              </div>
                         
@@ -299,7 +376,7 @@ const AddDispatchRider = (props) => {
                </form>
            </div>
            <div className = "addDR-back">
-                <button className = "btn-primary">Back</button>
+                <button className = "btn-primary" onClick = {() => {history.push('/dispatchRiders')}}>Back</button>
            </div>
         </div>
     )
@@ -310,13 +387,15 @@ const mapStateToProps = (state) =>{
         branches: state.firestore.data.Branch,
         courierID: state.courier.courierId,
         auth: state.firebase.auth,
-        add_dispatchrider_Error: state.dispatchRider.add_DispatchRider_Error
+        add_dispatchrider_Error: state.dispatchRider.add_DispatchRider_Error,
+        barangays: state.dispatchRider.barangays
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
         addDispatchRiderInFirebase: (addDispatchRider) => dispatch(addDispatchRiderInFirebase(addDispatchRider)),
+        SelectDesignateBarangay: (cityID) => dispatch(SelectDesignateBarangay(cityID)),
     }
 } 
 

@@ -34,3 +34,20 @@ export const addDispatchRiderInFirebase = (addDispatchRider) => {
   
     }
 }
+
+export const SelectDesignateBarangay = (cityID) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firestore = getFirebase().firestore();
+        var barangays = [];
+        firestore.collection("cities").doc(cityID).collection("barangay").get()
+        .then(querySnapshot => {
+            if(!querySnapshot.empty){
+                    querySnapshot.forEach(doc => {
+                        //console.log(doc.id, " => ", doc.data());
+                        barangays.push(doc.data());   
+                    });
+                    dispatch({type: 'SELECTED_DESIGNATE_BARANGAY_SUCCESS', barangays});  
+             }
+        });
+    }
+}

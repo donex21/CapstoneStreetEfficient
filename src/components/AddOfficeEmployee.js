@@ -39,26 +39,26 @@ const AddOfficeEmployee = (props) => {
         // eslint-disable-next-line
     }, [checked]);
 
-    useEffect(() => {
-        if (!addOffice_Emp_Error){
-            setOfficeEmployeeSignup({
-                email : '',
-                fname : '',
-                mname :'',
-                lname :'',
-                address: '',
-                contactNumber: '',
-                birthdate: null,
-                gender: 'Male',
-                branch: '',
-                jobtitle: 'Office Clerk',
-                status: 'inactive',
-                courier_id: courierID,
-                encodedBY: encodedBY[1],
-            });
-            setChecked(false);
-        } // eslint-disable-next-line
-    }, [addOffice_Emp_Error])
+    // useEffect(() => {
+    //     if (!addOffice_Emp_Error){
+    //         setOfficeEmployeeSignup({
+    //             email : '',
+    //             fname : '',
+    //             mname :'',
+    //             lname :'',
+    //             address: '',
+    //             contactNumber: '',
+    //             birthdate: null,
+    //             gender: 'Male',
+    //             branch: '',
+    //             jobtitle: 'Office Clerk',
+    //             status: 'inactive',
+    //             courier_id: courierID,
+    //             encodedBY: encodedBY[1],
+    //         });
+    //         setChecked(false);
+    //     } // eslint-disable-next-line
+    // }, [addOffice_Emp_Error])
 
     const handleOnChange = (e) =>{
         setOfficeEmployeeSignup({...officeEmployeeSignup, [e.target.name]: e.target.value})
@@ -67,7 +67,25 @@ const AddOfficeEmployee = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(officeEmployeeSignup);
-        props.addOfficeEmployee(officeEmployeeSignup)          
+        props.addOfficeEmployee(officeEmployeeSignup)   
+        
+        
+        setOfficeEmployeeSignup({
+            email : '',
+            fname : '',
+            mname :'',
+            lname :'',
+            address: '',
+            contactNumber: '',
+            birthdate: null,
+            gender: 'Male',
+            branch: '',
+            jobtitle: 'Office Clerk',
+            status: 'inactive',
+            courier_id: courierID,
+            encodedBY: encodedBY[1],
+        });
+        setChecked(false);
     }
    
     const options = branches && Object.keys(branches).map(function (i) {
