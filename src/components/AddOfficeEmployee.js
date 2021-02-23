@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {addOfficeEmployee} from '../store/actions/officeEmployeeAction'
 import { activeTextSwitch, inactiveTextSwitch } from './CustomsStyles';
 
-import '../styles/AddOfficeEmployee.scss'
+//import '../styles/AddOfficeEmployee.scss'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'

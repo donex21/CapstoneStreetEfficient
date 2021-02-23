@@ -17,6 +17,7 @@ import DispatchRiders from './components/DispatchRiders'
 import UserProfile from './components/UserProfile'
 import AddDispatchRider from './components/AddDispatchRider'
 import AddItem from './components/AddItem'
+import ItemPrint from './components/ItemPrint'
 
 export class App extends Component {
   
@@ -39,6 +40,7 @@ export class App extends Component {
             <Route exact path = '/userProfile' component = {UserProfile} />
             <Route exact path = '/addDispatchRiders' component = {AddDispatchRider} />
             <Route exact path = '/addItem' component = {AddItem} />
+            <Route exact path = '/itemPrint' component = {ItemPrint} />
           </Switch>
   
           <div className = "footer">

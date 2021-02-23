@@ -1,3 +1,6 @@
+import firebase from '../config/fbConfig'
+
+
 export const activeTextSwitch = {
     display: "flex",
     justifyContent: "center",
@@ -39,3 +42,33 @@ export const customStyles = {
       padding: 0
     })
   };
+ 
+export const getRandomString = (length) => {
+    var result = '';
+         
+        function collectors(callback){
+          result = '';
+          var randomChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';    
+          for ( var i = 0; i < length; i++ ) {
+              result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+          } 
+          var docRef = firebase.firestore().collection("Items").doc(result);
+          docRef.get().then(function (doc) {
+              if (!doc.exists) {
+                  callback(result); 
+              } else {
+                  collectors(callback); 
+              }
+          }).catch(function (error) {
+              callback(null); 
+          });
+        }
+        
+        collectors(function(store){ 
+         result = store;
+        });
+    //console.log(result)
+    return result;
+    
+}
+

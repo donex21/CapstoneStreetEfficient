@@ -118,7 +118,7 @@ const AddDispatchRider = (props) => {
             var inputElements = document.getElementsByTagName('input');
 
             for (var i=0; i < inputElements.length; i++) {
-                if (inputElements[i].type == 'file') {
+                if (inputElements[i].type === 'file') {
                     inputElements[i].value = '';
                 }
             }

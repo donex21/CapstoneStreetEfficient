@@ -1,0 +1,88 @@
+.addtoprint-mcntr {
+  display: flex;
+  flex-flow: column wrap;
+  margin-bottom: 100px;
+}
+.addtoprint-cntr {
+  margin-top: 50px;
+  //   height: 300px;
+  margin-bottom: 50px;
+  width: 60%;
+  display: flex;
+  flex-flow: column wrap;
+  border: black solid 2px;
+}
+
+.headerprint {
+  margin: 10px 0;
+  display: flex;
+  flex-flow: row wrap;
+}
+.headerbarcode {
+  align-items: center;
+  flex: 2;
+}
+
+.logoToPrint {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.shipToPrint,
+.printSender {
+  display: flex;
+  flex-flow: row wrap;
+  border-bottom: black solid 2px;
+}
+.shipToPrint {
+  border-top: black solid 2px;
+}
+
+.shipTo {
+  padding: 0 20px;
+  border-right: black solid 1px;
+}
+.printFrom {
+  padding: 0 25px;
+  border-right: black solid 1px;
+}
+
+.shipToDetail,
+.printsenderDeatil {
+  padding-left: 10px;
+}
+.shipToContactNumber,
+.printsenderContactNumber {
+  padding-bottom: 10px;
+}
+
+.shipToName,
+.shipTo p,
+.printsenderName .printFrom p {
+  padding-top: 10px;
+}
+
+.bottomBarcode {
+  display: grid;
+  place-content: center;
+  padding: 20px 0;
+}
+
+.printButtons {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.backbtn {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.printButton {
+  margin: 0 10px;
+}
+
+.saveItemButton {
+  flex: 1;
+  margin: 0 30px;
+}

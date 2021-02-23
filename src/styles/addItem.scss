@@ -1,0 +1,66 @@
+.addItem-trackingnumber {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  margin-bottom: 20px;
+}
+
+.addItem-trackingnumber input {
+  border: none;
+  font-size: 30px;
+  text-align: center;
+  background: cornflowerblue;
+}
+
+.sender-info-ctnr,
+.recipient-info-ctnr,
+.item-info-ctnr,
+.deliverTo {
+  margin-bottom: 20px;
+}
+
+.sender-info-ctnr input,
+.recipient-info-ctnr input {
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: none;
+  background: rgba(57, 129, 229, 0.2);
+  margin-left: 10px;
+}
+
+.senderName-input,
+.senderContact-input,
+.senderStreet-input,
+.recipientName-input,
+.recipientContact-input,
+.recipientStreet-input {
+  width: 100%;
+}
+
+.item-info-ctnr input {
+  width: 100px;
+}
+
+.itemqty-input,
+.itemWeight-input,
+.itemCOD-input {
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: none;
+  background: rgba(57, 129, 229, 0.2);
+}
+
+.itemqty-input {
+  margin-left: 10px;
+}
+
+.itemWeight-input {
+  margin-left: 20px;
+}
+
+.itemCOD-input {
+  margin-left: 30px;
+}
