@@ -4,7 +4,8 @@ import 'react-toastify/dist/ReactToastify.css'
 toast.configure();
 
 const initstate = {
-    addItem: null
+    addItem: null,
+    selectedUnAssignedItems: null,
 }
 
 const itemReducer = (state = initstate, action) => {
@@ -25,6 +26,12 @@ const itemReducer = (state = initstate, action) => {
             return {
                 ...state,
                 addItem: null
+            }
+
+        case 'GET_SELECTED_UNASSIGNED_ITEM':
+            return {
+                ...state,
+                selectedUnAssignedItems: action.item
             }
         default:
             return state

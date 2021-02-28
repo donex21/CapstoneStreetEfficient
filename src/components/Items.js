@@ -7,6 +7,7 @@ function Items() {
         <div>
             Items
             <button className="btn-primary" onClick = {() => history.push('/addItem')}>Add Item</button>
+            <button className="btn-primary" onClick = {() => history.push('/assignRiderInItem')}>Assign Rider In Item</button>
         </div>
     )
 }

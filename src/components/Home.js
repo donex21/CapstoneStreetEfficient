@@ -17,7 +17,7 @@ function Home(props) {
     useEffect(() => {
             props.getCourierID(authid);    
             // eslint-disable-next-line     
-    }, [authid])
+    }, [])
     
     return (
         <div>
@@ -31,7 +31,8 @@ const mapStateToProps = (state) =>{
     //console.log(state)
     return{
         auth: state.firebase.auth,
-        courierID: state.courier.courierId
+        courierID: state.courier.courierId,
+        courBranch: state.courier.courBranch,
     }
 }
 
@@ -46,7 +47,10 @@ export default compose(
     firestoreConnect((props) => [
         {
             collection: 'Office_Employees',
-            doc: props.auth.uid
+            where: [
+                ['courier_id', '==', props.courierID],
+                ['branch', '==', props.courBranch]
+            ]
         },
 
         {
@@ -55,6 +59,21 @@ export default compose(
                 ['Courier_id', '==', props.courierID],
                 ['status', '==', 'active']
             ]
-        }
+        },
+        {
+            collection: 'Items',
+            where: [
+                ['courier_id', '==', props.courierID],
+                ['itemRecipientBranch', '==', props.courBranch]
+            ]
+        },
+        {
+            collection: 'Dispatch Riders',
+            where: [
+                ['courier_id', '==', props.courierID],
+                ['branch', '==', props.courBranch]
+            ]
+        },
+
     ])
 ) (Home)

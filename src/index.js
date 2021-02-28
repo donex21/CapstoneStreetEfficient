@@ -11,6 +11,10 @@ import { ReactReduxFirebaseProvider, getFirebase, isLoaded  } from 'react-redux-
 import firebase from './config/fbConfig';
 import rootReducer from './store/reducers/rootReducer'
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+
 const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({ getFirebase })) );
 
   const rrfProps = {

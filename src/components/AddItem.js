@@ -13,7 +13,7 @@ const AddItem = (props) => {
     let displayName = auth.displayName;
     let encodedBY = displayName.split("@");
     const [addItem, setAddItem] = useState({
-        itemTrackingNumber: '',
+        item_id: '',
         itemSendername: '',
         itemSenderContactNumber: '',
         itemSenderAddressStreet: '',
@@ -48,7 +48,7 @@ const AddItem = (props) => {
         props.addItemToPrint(addItem);
 
         setAddItem({
-            itemTrackingNumber: '',
+            item_id: '',
             itemSendername: '',
             itemSenderContactNumber: '',
             itemSenderAddressStreet: '',
@@ -83,6 +83,7 @@ const AddItem = (props) => {
 
     
     return (
+        <div className = "main-container">
         <div className = "addDR-container">
             <div className = "addDR-header">
                 <h1>ADD ITEM</h1>
@@ -93,11 +94,11 @@ const AddItem = (props) => {
                         <h2>Tracking Number</h2>
                         <input type="text"
                             className = "trackingNumber-input"
-                            name="itemTrackingNumber"                             
+                            name="item_id"                             
                             required   
                             readOnly 
                             onFocus = {(e) => setAddItem({...addItem, [e.target.name]: getRandomString(12)})}
-                            value = {addItem.itemTrackingNumber}
+                            value = {addItem.item_id}
                         />
                     </div>
                     <hr />
@@ -291,6 +292,7 @@ const AddItem = (props) => {
             <div className = "addDR-back">
                 <button className = "btn-primary" onClick = {() => {history.push('/items')}}>Back</button>
            </div>
+        </div>
         </div>
     )
 }

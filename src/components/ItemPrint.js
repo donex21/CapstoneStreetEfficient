@@ -26,6 +26,7 @@ const ItemPrint = (props) => {
     }
 
   return (
+    <div className = "main-container">
     <div className =  "addtoprint-mcntr">
         <AddItemToPrint ref={componentRef} itemToPrint = {itemToPrint}/>
         <div className ="printButtons">
@@ -42,6 +43,7 @@ const ItemPrint = (props) => {
         </div>
         
       
+    </div>
     </div>
   )
 }

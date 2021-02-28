@@ -151,6 +151,7 @@ const AddDispatchRider = (props) => {
   
       
     return (
+        <div className = "main-container">
         <div className = "addDR-container">
            <div className = "addDR-header">
                 <h1>Dispatch Rider Registration</h1>
@@ -295,7 +296,7 @@ const AddDispatchRider = (props) => {
                                     styles={customStyles}
                                     options={optionBarangay}
                                     classNamePrefix="mySelect"                                     
-                                    placeholder = "Choose designate Barangay"    
+                                    placeholder = "Designate Barangay"    
                                     value =  {optionBarangay && optionBarangay.find(obj => obj.value === addDispatchRider.designateBarangay)}
                                     onChange = {e => setAddDispatchRider({...addDispatchRider, designateBarangay: e.value})}                   
                                     isSearchable
@@ -378,6 +379,7 @@ const AddDispatchRider = (props) => {
            <div className = "addDR-back">
                 <button className = "btn-primary" onClick = {() => {history.push('/dispatchRiders')}}>Back</button>
            </div>
+        </div>
         </div>
     )
 }

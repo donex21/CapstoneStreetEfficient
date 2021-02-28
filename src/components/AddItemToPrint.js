@@ -4,8 +4,7 @@ import Barcode from 'react-barcode'
 export class AddItemToPrint extends React.PureComponent { 
     render() {
         const itemToPrint = this.props.itemToPrint
-        const inputRef = this.props.inputRef
-        var barcodeNumber = itemToPrint.itemTrackingNumber.toString();
+        var barcodeNumber = itemToPrint.item_id.toString();
         return (
             <>
                 <div className = "addtoprint-cntr">

@@ -18,6 +18,8 @@ import UserProfile from './components/UserProfile'
 import AddDispatchRider from './components/AddDispatchRider'
 import AddItem from './components/AddItem'
 import ItemPrint from './components/ItemPrint'
+import AssignRiderInItem from './components/AssignRiderInItem'
+import SelectAssignRider from './components/SelectAssignRider'
 
 export class App extends Component {
   
@@ -41,6 +43,8 @@ export class App extends Component {
             <Route exact path = '/addDispatchRiders' component = {AddDispatchRider} />
             <Route exact path = '/addItem' component = {AddItem} />
             <Route exact path = '/itemPrint' component = {ItemPrint} />
+            <Route exact path = '/assignRiderInItem' component = {AssignRiderInItem} />
+            <Route exact path = '/selectAssignRider' component = {SelectAssignRider} />
           </Switch>
   
           <div className = "footer">
@@ -54,7 +58,7 @@ export class App extends Component {
 const mapStateToProps = (state) =>{
   return{
       newUser: state.courier.newuser,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
   }
 }
 
