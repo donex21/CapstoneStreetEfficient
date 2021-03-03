@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-//import { signOut }  from '../store/actions/courierAction'
+
 import { connect } from 'react-redux';
 import fire from '../config/fbConfig'
 
@@ -35,7 +35,7 @@ function NavigatioHeader(props) {
 
     const logout= () =>{
         fire.auth().signOut();
-        window.location.href = '/'
+        window.location.href = '/'   
     }
 
       
@@ -87,7 +87,6 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        //signOut: () => dispatch(signOut()),
     }
 }
 

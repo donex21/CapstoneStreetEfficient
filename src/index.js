@@ -15,7 +15,32 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
-const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({ getFirebase })) );
+// function saveToLocalStorage(store) {
+//   try {
+//       const serializedStore = JSON.stringify(store);
+//       window.localStorage.setItem('store', serializedStore);
+//   } catch(e) {
+//       console.log(e);
+//   }
+// }
+
+// function loadFromLocalStorage() {
+//   try {
+//       const serializedStore = window.localStorage.getItem('store');
+//       if(serializedStore === null) return undefined;
+//       return JSON.parse(serializedStore);
+//   } catch(e) {
+//       console.log(e);
+//       return undefined;
+//   }
+// }
+
+// const persistedState = loadFromLocalStorage();
+
+
+const store = createStore(rootReducer , applyMiddleware(thunk.withExtraArgument({ getFirebase })) );
+
+//store.subscribe(() => saveToLocalStorage(store.getState()));
 
   const rrfProps = {
     firebase,

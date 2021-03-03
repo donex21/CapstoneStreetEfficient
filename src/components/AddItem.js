@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { getRandomString } from './CustomsStyles';
 import { addItemToPrint } from '../store/actions/itemAction';
-import { customStyles } from './CustomsStyles';
+import { customStyles , getRandomString } from './CustomsStyles';
 import Select from 'react-select'
 
 
@@ -13,7 +12,7 @@ const AddItem = (props) => {
     let displayName = auth.displayName;
     let encodedBY = displayName.split("@");
     const [addItem, setAddItem] = useState({
-        item_id: '',
+        item_id: getRandomString(12),
         itemSendername: '',
         itemSenderContactNumber: '',
         itemSenderAddressStreet: '',
@@ -91,14 +90,15 @@ const AddItem = (props) => {
             <div className = "addDr-form">
                 <form className = "addItem-form" onSubmit ={handleSubmit}>
                     <div className = "addItem-trackingnumber">
-                        <h2>Tracking Number</h2>
+                        <h2>Item ID</h2>
                         <input type="text"
                             className = "trackingNumber-input"
                             name="item_id"                             
                             required   
                             readOnly 
-                            onFocus = {(e) => setAddItem({...addItem, [e.target.name]: getRandomString(12)})}
-                            value = {addItem.item_id}
+                            //onFocus = {(e) => setAddItem({...addItem, [e.target.name]: getRandomString(12)})}
+                            //value = {addItem.item_id}
+                            value ={addItem.item_id}
                         />
                     </div>
                     <hr />

@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import fire from '../config/fbConfig' 
 import { useHistory} from 'react-router-dom';
 import moment from 'moment';
+import {firestoreConnect} from 'react-redux-firebase'
+import {compose} from 'redux'
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory  from 'react-bootstrap-table2-paginator';
 import { AssignRiderColumns } from './TableColumns';
-import { getSelectedUnassignedItem } from '../store/actions/itemAction';
+import { getSelectedUnassignedItem, getBranchBarangays } from '../store/actions/itemAction';
 
 const AssignRiderInItem = (props) => {
     const {courierID, courBranch} = props;
@@ -65,6 +67,7 @@ const AssignRiderInItem = (props) => {
         onDoubleClick: (e, row) => {
            // console.log(row);
             props.getSelectedUnassignedItem(row)
+            props.getBranchBarangays(courBranch)
             history.push('/selectAssignRider');
         }
     }
@@ -83,18 +86,19 @@ const AssignRiderInItem = (props) => {
         <div className = "container-fluid">
             <div className = "row justify-content-md-center">
                 <h1>Assign Dispatch Rider</h1>   
-            </div>
-            
-            <BootstrapTable
-            striped
-            keyField = "item_id"
-            data = {item}
-            columns = {columns}
-            pagination = {paginationFactory()}
-            rowEvents = {rowEvents}
-            selectRow = {selectRow}
-            sort={ { dataField: 'itemSendername', order: 'asc' } }
-            />
+            </div>           
+            <div className = "ARtable">
+                <BootstrapTable
+                striped 
+                keyField = "item_id"
+                data = {item}
+                columns = {columns}
+                pagination = {paginationFactory()}
+                rowEvents = {rowEvents}
+                selectRow = {selectRow}
+                sort={ { dataField: 'date_encoded', order: 'asc' } }
+                />
+            </div> 
             <div>
                 <button className = "btn-primary" onClick = {() => {history.push('/items')}}>Back</button>
             </div>
@@ -113,8 +117,19 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = (dispatch) =>{
     return {
         getSelectedUnassignedItem: (item) => dispatch(getSelectedUnassignedItem(item)),
-
+        getBranchBarangays: (courBranch) => dispatch(getBranchBarangays(courBranch)),
     }
 }
- export default connect(mapStateToProps, mapDispatchToProps) (AssignRiderInItem)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps ),
+    firestoreConnect((props) => [
+        {
+        collection: 'Dispatch Riders',
+        where: [
+            ['courier_id', '==', props.courierID],
+            ['branch', '==', props.courBranch]
+        ]
+    },
+])
+) (AssignRiderInItem)
 

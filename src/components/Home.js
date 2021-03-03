@@ -67,13 +67,13 @@ export default compose(
                 ['itemRecipientBranch', '==', props.courBranch]
             ]
         },
-        {
-            collection: 'Dispatch Riders',
-            where: [
-                ['courier_id', '==', props.courierID],
-                ['branch', '==', props.courBranch]
-            ]
-        },
+        // {
+        //     collection: 'Dispatch Riders',
+        //     where: [
+        //         ['courier_id', '==', props.courierID],
+        //         ['branch', '==', props.courBranch]
+        //     ]
+        // },
 
     ])
 ) (Home)

@@ -66,7 +66,7 @@ const courierReducer = (state = initstate, action) => {
             return{
                 ...state,
                 newuser: true
-            }           
+            }          
 
         case 'GET_COURIER_ID_SUCCESS':
             console.log('GET_COURIER_ID_SUCCESS');

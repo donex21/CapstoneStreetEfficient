@@ -2,10 +2,83 @@
   margin-bottom: 100px;
 }
 
+.ARtable {
+  cursor: pointer;
+}
+
+.main-cntr {
+  margin-bottom: 100px;
+}
+
 .sar-tn {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .sar-tn h6 {
-  margin: 0 0;
+  margin-bottom: 0;
+}
+
+.crd-sender,
+.crd-recipient {
+  width: 18rem;
+  margin-right: 10px;
+  padding: 10px;
+  background: #90b5ed;
+  margin-bottom: 10px;
+}
+
+.item-desc {
+  width: 37rem;
+  background: #90b5ed;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.datepicker-aritem {
+  width: 37rem;
+  background: rgba(144, 181, 237, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+}
+.riderlist-cntr,
+.riderTable {
+  width: 37rem;
+}
+
+.riderlist {
+  margin-top: 10px;
+}
+
+.riderTable {
+  cursor: pointer;
+}
+
+.btn-cntr {
+  margin-top: 20px;
+}
+
+.drsubmit {
+  background: #3981e5;
+  color: #eee;
+  font-size: 1rem;
+  padding: 0.3rem 3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.drsubmit:hover {
+  opacity: 0.7;
+  color: rgb(17, 245, 233);
+}
+.brgyselectqoute {
+  margin-right: 10px;
+}
+
+.brgySelect {
+  height: 30px;
+  margin-bottom: 20px;
 }

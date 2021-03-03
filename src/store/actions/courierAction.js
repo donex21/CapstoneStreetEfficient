@@ -136,8 +136,7 @@ export const getCourierID = (authID) => {
           }
       }).catch(() => {
           // An error happened.
-      });
-
-    
+      });  
   }
 }
+

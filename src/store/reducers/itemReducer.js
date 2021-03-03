@@ -5,6 +5,7 @@ toast.configure();
 
 const initstate = {
     addItem: null,
+    getbarangays: null,
     selectedUnAssignedItems: null,
 }
 
@@ -33,6 +34,21 @@ const itemReducer = (state = initstate, action) => {
                 ...state,
                 selectedUnAssignedItems: action.item
             }
+        case 'ADD_ITEM_DEL_SUCCESS':
+            toast.success('Successfully Assigned')
+            return {
+                ...state,
+                selectedUnAssignedItems: null
+            }
+        case 'ADD_ITEM_DEL_ERROR':
+            return state
+
+        case 'GET_BARANGAY_SUCCESS':
+            return {
+                ...state,
+                getbarangays: action.barangays
+            }
+
         default:
             return state
     }

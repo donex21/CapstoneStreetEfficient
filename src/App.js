@@ -22,6 +22,7 @@ import AssignRiderInItem from './components/AssignRiderInItem'
 import SelectAssignRider from './components/SelectAssignRider'
 
 export class App extends Component {
+
   
   render() {
     const {auth, newUser} = this.props;
