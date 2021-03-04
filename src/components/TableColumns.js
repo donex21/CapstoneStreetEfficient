@@ -15,5 +15,7 @@ export const DispatchRidersAssign = [
     {dataField: "designateBarangay", text: "Assign Barangay", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
     {dataField: "vehicle_type", text: "Vehicle Type", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
     {dataField: "contactNumber", text: "Contact Number", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+    {dataField: "itemtotalweight", text: "Total Weight", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+    {dataField: "itemdaytotal", text: "Total Item", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
 ]
 

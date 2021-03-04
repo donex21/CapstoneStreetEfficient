@@ -1,3 +1,5 @@
+import moment from 'moment'; 
+
 export const addItemToPrint = (addItem) => {
     return (dispatch, getState) => {
         dispatch({type: 'ADD_ITEM_TO_PRINT', addItem });
@@ -53,13 +55,15 @@ export const getBranchBarangays = (courBranch) => {
     }
 }
 
+
 export const addItemDel = (itemDel) => {
     return (dispatch, getState, {getFirebase}) => {
         const firestore = getFirebase().firestore();
 
-        var newDocRef = firestore.collection('Delivery_Items').doc()
+        var newDocRef = firestore.collection('Delivery_Header').doc()
         newDocRef.set({
            ...itemDel, 
+           del_date_sched_string:  moment(itemDel.del_date_sched).format('LL').toString(),
            del_item_id: newDocRef.id
         }).then(() => {
             firestore.collection("Items").doc(itemDel.item_id).update({

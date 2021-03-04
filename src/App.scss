@@ -49,6 +49,11 @@ body {
   @import "./styles/assignRiderInItem.scss";
 }
 
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
 .footer {
   position: fixed;
   left: 0;

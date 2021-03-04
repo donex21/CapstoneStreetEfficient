@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-//import fire from '../config/fbConfig'
+import fire from '../config/fbConfig';
+import moment from 'moment';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory  from 'react-bootstrap-table2-paginator';
@@ -28,9 +29,9 @@ const SelectAssignRider = (props) => {
         rider_id: null,
         assignedby: assignedBY[1],
         date_assigned: new Date(),
-        attempt_del_date: null,
-        item_del_status: 'assigned',
-        del_date_sched: null
+        del_date_sched: null,
+        item_weight: item.itemweight,
+        itemRecipientContactNumber: item.itemRecipientContactNumber,
     });
 
     const columns = useMemo(() => DispatchRidersAssign, []);
@@ -57,21 +58,56 @@ const SelectAssignRider = (props) => {
 
     const [selectedbrgy, setSelectedBrgy] = useState(item.itemRecipientAddressBarangay);
     const [newBrgy, setNewBrgy] = useState([]);
+    const [bry, setbry] = useState([]);
 
     function firstFilterBrgy () {
-        let newArray = dispatchRiders.filter((rider) => {
+        let riderslist = [] 
+        dispatchRiders && dispatchRiders.map((rider, index) =>{           
+            let counter = 0;
+            let weightSum = 0;
+            fire.firestore().collection("Delivery_Header")
+            .where("rider_id", "==", rider.id)
+            .where("del_date_sched", "==", itemDel.del_date_sched)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    weightSum = weightSum + parseInt(doc.data().item_weight);
+                    counter ++;
+                });
+                var riders = {
+                    id: rider.id,
+                    fname: rider.fname,
+                    mname: rider.mname,
+                    lname: rider.lname,
+                    designateBarangay: rider.designateBarangay,
+                    vehicle_type: rider.vehicle_type,
+                    contactNumber: rider.contactNumber,
+                    itemdaytotal: counter.toString(),
+                    itemtotalweight: weightSum.toString()
+                };
+                riderslist.push(riders)
+            })     
+        });
+        setbry(riderslist);
+        console.log(bry)       
+        let newArray = bry.filter((rider) => {
             let searchValue = rider.designateBarangay;
             return searchValue.indexOf(item.itemRecipientAddressBarangay) !==-1;
         });
-        setNewBrgy(newArray);
+        setNewBrgy(newArray);   
+       
     }
+
     useEffect(() => {
         firstFilterBrgy();
-    }, [])
+    },[itemDel.del_date_sched])
+
+
+   // console.log(dispatchRiders)
 
     const onSelectChange = (e) => {
         setSelectedBrgy(e.target.value);
-        let newArray = dispatchRiders.filter((rider) => {
+        let newArray = bry.filter((rider) => {
             let searchValue = rider.designateBarangay;
             return searchValue.indexOf(e.target.value) !==-1;
         });
