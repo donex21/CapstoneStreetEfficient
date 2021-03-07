@@ -1,37 +1,43 @@
-.navBarItems{
-    background: #3981E5;
-    height: 60px;
+.navBarItems {
+  background: #3981e5;
+  height: 60px;
 }
-.headerLogo{
-    padding-top: 10px;
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+}
+
+.headerLogo {
+  padding-top: 10px;
+  float: left;
+  margin-left: 50px;
+}
+.headerMenu {
+  float: right;
+}
+.headerMenuUl {
+  li {
+    margin-top: 10px;
     float: left;
-    margin-left: 50px;
-}
-.headerMenu{
-    float: right;
-}
-.headerMenuUl{
-    li{ 
-        margin-top: 10px;
-        float: left;
-        display: block;
-        padding: 5px 16px;
-        font-size: 17px;  
-        cursor: pointer; 
-    }
-    .headerLink{
-        text-decoration: none;
-        color: white;
-    }
+    display: block;
+    padding: 5px 16px;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  .headerLink {
+    text-decoration: none;
+    color: white;
+  }
 }
 
-.headerMenuUl li:hover{
-    background: #97bcf0;
-    color: #fff;
+.headerMenuUl li:hover {
+  background: #97bcf0;
+  color: #fff;
 }
 
-.navUser{
- background-color: red;
+.navUser {
+  background-color: red;
   border: none;
   color: white;
   padding: 5px;
@@ -42,45 +48,40 @@
   margin-right: 20px;
   cursor: pointer;
 }
-.navUser:focus{
-    outline: none;
+.navUser:focus {
+  outline: none;
 }
-.navUser:hover{
-    background: rgba(255, 0,0, 0.5)
-}
-
-.submenu-employees{
-    display: none;
+.navUser:hover {
+  background: rgba(255, 0, 0, 0.5);
 }
 
-.no-submenu-employees{
-    display: none;
+.submenu-employees {
+  display: none;
 }
 
-
-.headerMenuUl li:hover .submenu-employees{
-    width: 120px;
-    display: block;
-    position: absolute;
-    background: #3981E5;
-    margin-left: -15px;
-    border-radius: 5px;
-
+.no-submenu-employees {
+  display: none;
 }
 
-.headerMenuUl li:hover .no-submenu-employees{
-    width: 120px;
-    display: none;
-    position: absolute;
-    background: #3981E5;
-    margin-left: -15px;
-    border-radius: 5px;
-
+.headerMenuUl li:hover .submenu-employees {
+  width: 120px;
+  display: block;
+  position: absolute;
+  background: #3981e5;
+  margin-left: -15px;
+  border-radius: 5px;
+  z-index: 1000;
 }
 
+//.headerMenuUl li:hover .no-submenu-employees {
+//width: 120px;
+// display: none;
+//position: absolute;
+//background: #3981e5;
+//margin-left: -15px;
+//border-radius: 5px;
+//}
 
-
-.headerMenuUl li:hover .submenu-employees ul{
-    display: block;
+.headerMenuUl li:hover .submenu-employees ul {
+  display: block;
 }
-

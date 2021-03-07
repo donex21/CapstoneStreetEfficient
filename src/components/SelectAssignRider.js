@@ -2,7 +2,6 @@ import React, { useMemo, useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import fire from '../config/fbConfig';
-import moment from 'moment';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory  from 'react-bootstrap-table2-paginator';

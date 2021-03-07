@@ -12,22 +12,33 @@ export const icon = new Icon({
 function RidersMap() {
     const [riders , setRiders] = useState([]);
     const [loading , setLoading] = useState(false);
+    //const [ridersdata, setRidersdata] = useState();
     
     const ref = fire.firestore().collection("DispatchRiders_Position")
     function getRiderLocation(){
-       setLoading(true);   
+       setLoading(true); 
         ref.onSnapshot((querySnapshot) => {  
-              // var riderdata= [];          
+                var riderdata= [];   
+                     
                 querySnapshot.forEach((doc) => {  
-                    //riderdata.push(doc.data());
-        
-                    var rider_id = doc.data().rider_id;
-                    var latitude = doc.data().latitude;
-                    var longitude = doc.data().longitude;
-                    var docRef = fire.firestore().collection("Dispatch Riders").doc(rider_id);
-                    docRef.get().then((doc) => {
-                        if (doc.exists) {
-                            // var riderObj = {
+                    riderdata.push(doc.data());
+                    // var rider_id = doc.data().rider_id;
+                    // var latitude = doc.data().latitude;
+                    // var longitude = doc.data().longitude;
+                    // var riderObj = [];
+                    // var docRef = fire.firestore().collection("Dispatch Riders").doc(rider_id);
+                    // docRef.get().then((doc) => {
+                    //     if (doc.exists) {
+                    //         riderObj.push({
+                    //             fname: doc.data().fname,
+                    //             lname: doc.data().lname,
+                    //             mname: doc.data().mname,
+                    //             contactNumber: doc.data().contactNumber,
+                    //             vehicle_type: doc.data().vehicle_type,
+                    //         });
+                            
+                            // riderdata.push(riderObj);           
+                            // setRiderdata(riderdata =>[...riderdata, {
                             //     rider_id,
                             //     latitude ,
                             //     longitude,
@@ -36,27 +47,15 @@ function RidersMap() {
                             //     mname: doc.data().mname,
                             //     contactNumber: doc.data().contactNumber,
                             //     vehicle_type: doc.data().vehicle_type,
-                            // };
-                            // riderdata.push(riderObj);           
-                            setRiders(riders =>[...riders, {
-                                rider_id,
-                                latitude ,
-                                longitude,
-                                fname: doc.data().fname,
-                                lname: doc.data().lname,
-                                mname: doc.data().mname,
-                                contactNumber: doc.data().contactNumber,
-                                vehicle_type: doc.data().vehicle_type,
-                            }]);
-                                
-                        } 
-                    });                                 
+                            // }]);                          
+                    //     } 
+                    // });  
+                    // riderdata.push({rider_id, latitude, longitude)                                                
                 });
-                //console.log(riderdata)
-                //setRiders(riderdata);
-                setLoading(false); 
-            });
-              
+               
+                setRiders(riderdata);
+                setLoading(false);
+            });                 
     }
 
     useEffect(() => {
@@ -66,7 +65,7 @@ function RidersMap() {
     if(loading){
         return <p>loading.....</p>
     }
-
+    
     console.log(riders);
 
     return (
@@ -84,15 +83,14 @@ function RidersMap() {
                     ]}
                     icon={icon}
                 >
-                    <Popup position={[ rider.latitude, rider.longitude]}>
+                    <Popup position={[ rider.latitude, rider.longitude]} >
                         <div>
-                            <p>{rider.rider_id}</p>
-                            <p>Name: {rider.fname} {rider.mname} {rider.lname} 
+                            <p>Name: {rider.rider_name }
                                 <br/>
-                                Phone: {rider.contactNumber}
+                                Phone: {rider.rider_contactNumber}
                                 <br/>
                                 Vehicle Type: {rider.vehicle_type}
-                            </p>     
+                            </p>
                         </div>
                     </Popup>
                     

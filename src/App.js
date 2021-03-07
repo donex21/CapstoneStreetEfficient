@@ -20,6 +20,7 @@ import AddItem from './components/AddItem'
 import ItemPrint from './components/ItemPrint'
 import AssignRiderInItem from './components/AssignRiderInItem'
 import SelectAssignRider from './components/SelectAssignRider'
+import OfficeEmpInfo from './components/OfficeEmpInfo'
 
 export class App extends Component {
 
@@ -30,23 +31,27 @@ export class App extends Component {
     const link = auth.uid ? Home : Courierlogin
     return (
       <div className = "app-main">
-          {withnavhead}
-          <Switch>
-            <Route exact path = '/' component = {link} />
-            <Route exact path = '/userlogin' component = {UserLogin} />
-            <Route exact path = '/inputNewPassword' component = {InputNewPwd} />
-            <Route exact path = '/home' component = {Home} />
-            <Route exact path = '/items' component = {Items} />
-            <Route exact path = '/ridersMap' component = {RidersMap} />
-            <Route exact path = '/officeEmployees' component = {OfficeEmployees} />
-            <Route exact path = '/dispatchRiders' component = {DispatchRiders} />
-            <Route exact path = '/userProfile' component = {UserProfile} />
-            <Route exact path = '/addDispatchRiders' component = {AddDispatchRider} />
-            <Route exact path = '/addItem' component = {AddItem} />
-            <Route exact path = '/itemPrint' component = {ItemPrint} />
-            <Route exact path = '/assignRiderInItem' component = {AssignRiderInItem} />
-            <Route exact path = '/selectAssignRider' component = {SelectAssignRider} />
-          </Switch>
+         {withnavhead} 
+         
+            <Switch>
+              <Route exact path = '/' component = {link} />
+              <Route exact path = '/userlogin' component = {UserLogin} />
+              <Route exact path = '/inputNewPassword' component = {InputNewPwd} />
+              <Route exact path = '/home' component = {Home} />
+              <Route exact path = '/items' component = {Items} />
+              <Route exact path = '/ridersMap' component = {RidersMap} />
+              <Route exact path = '/officeEmployees' component = {OfficeEmployees} />
+              <Route exact path = '/dispatchRiders' component = {DispatchRiders} />
+              <Route exact path = '/userProfile' component = {UserProfile} />
+              <Route exact path = '/addDispatchRiders' component = {AddDispatchRider} />
+              <Route exact path = '/addItem' component = {AddItem} />
+              <Route exact path = '/itemPrint' component = {ItemPrint} />
+              <Route exact path = '/assignRiderInItem' component = {AssignRiderInItem} />
+              <Route exact path = '/selectAssignRider' component = {SelectAssignRider} />
+              <Route exact path = '/officeEmpInfo' component = {OfficeEmpInfo} />
+            </Switch>
+          
+    
   
           <div className = "footer">
                <h2>Copyright @ StreetEfficient 2021</h2>

@@ -1,3 +1,34 @@
+//Items Page
+.items-sidebar {
+  height: 100vh;
+  background: cornflowerblue;
+}
+
+.btn-sidebar {
+  background: #3981e5;
+  color: #eee;
+  font-size: 1rem;
+  width: 90%;
+  padding: 0.3rem 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.btn-sidebar:hover {
+  // opacity: 0.7;
+  color: #3981e5;
+  background: #fff;
+  border: #3981e5;
+}
+
+.items-page {
+  margin-bottom: 100px;
+}
+
+//addItem Page
 .addItem-trackingnumber {
   display: flex;
   place-items: center;
@@ -63,4 +94,10 @@
 
 .itemCOD-input {
   margin-left: 35px;
+}
+
+//EntryPage
+
+.searchEntryItems {
+  margin-bottom: 5px;
 }

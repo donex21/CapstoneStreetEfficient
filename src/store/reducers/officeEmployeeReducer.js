@@ -2,7 +2,8 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const initstate = {
-    addOffice_Emp_Error: null
+    addOffice_Emp_Error: null,
+    selectedOfficeEmp: null,
 }
 
 toast.configure();
@@ -22,6 +23,11 @@ const officeEmployeeReducer = (state = initstate, action) => {
             return{
                 ...state,
                 addOffice_Emp_Error: 'Error'
+            } 
+        case 'GET_SELECTED_OFFICE_EMP':
+            return{
+                ...state,
+                selectedOfficeEmp: action.emp
             } 
 
         default:

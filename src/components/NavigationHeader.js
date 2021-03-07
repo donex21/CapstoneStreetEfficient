@@ -37,9 +37,6 @@ function NavigatioHeader(props) {
         fire.auth().signOut();
         window.location.href = '/'   
     }
-
-      
-
     return (
         <nav className = "navBarItems">
         <div className = "headerLogo" onClick = {() => window.location.href = '/'}>
@@ -49,8 +46,8 @@ function NavigatioHeader(props) {
             <ul className = "headerMenuUl">
                 <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/home"> Home </NavLink> </li>
                 <li className = "headerLink"> Employees
-                    <div className = {jobtitle[0] === "Manager" ? `submenu-employees` : `no-submenu-employees`}>
-                        <ul>
+                    <div className = {jobtitle[0] === "Manager" ? `submenu-employees` : `no-submenu-employees`}>                
+                        <ul className = ".navbar-nav">
                             <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/officeEmployees"> Office Employees </NavLink></li>
                             <li><NavLink className = "headerLink"  activeStyle={{ color: 'black' }} to= "/dispatchRiders"> Dispatch Riders </NavLink></li>
                         </ul>

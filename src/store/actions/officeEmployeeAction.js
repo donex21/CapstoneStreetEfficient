@@ -34,3 +34,9 @@ export const addOfficeEmployee = (officeEmployeeSignup) => {
   
     }
 }
+
+export const getSelectedOfficeEmp = (emp) => {
+    return (dispatch, getState) => {
+        dispatch( {type: 'GET_SELECTED_OFFICE_EMP', emp});
+    }
+}
