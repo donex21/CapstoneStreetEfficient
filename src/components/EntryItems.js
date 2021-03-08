@@ -158,7 +158,7 @@ const EntryItems = (props) => {
     return (
         <div className = "container-fluid">
             <div className = "row justify-content-md-center">
-                <h2>Entry Items</h2>   
+                <h2>Branch Items</h2>   
             </div>  
             <div className = "ARtable">
                 <div className = "d-flex justify-content-center searchEntryItems">

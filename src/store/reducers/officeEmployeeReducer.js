@@ -29,6 +29,13 @@ const officeEmployeeReducer = (state = initstate, action) => {
                 ...state,
                 selectedOfficeEmp: action.emp
             } 
+        case 'UPDATE_EMP_SUCCESS':
+            console.log('SUCCESSFULLY UPDATED')
+            toast.success('Office Employee Sucessfully Updated')
+            return{
+                ...state,
+                selectedOfficeEmp: action.singleEmp
+            } 
 
         default:
             return state

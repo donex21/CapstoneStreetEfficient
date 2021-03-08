@@ -40,3 +40,18 @@ export const getSelectedOfficeEmp = (emp) => {
         dispatch( {type: 'GET_SELECTED_OFFICE_EMP', emp});
     }
 }
+
+export const UpdateSelectedOfficeEmp = (singleEmp) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firestore = getFirebase().firestore();
+        firestore.collection("Office_Employees").doc(singleEmp.id)
+        .update({
+           ...singleEmp
+        }).then(() => {
+                dispatch({type: 'UPDATE_EMP_SUCCESS', singleEmp})
+            }).catch(() => {
+                // An error happened.
+                dispatch({type: 'UPDATE_EMP_ERROR'})
+            });
+    }
+}

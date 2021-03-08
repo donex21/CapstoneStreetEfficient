@@ -30,6 +30,7 @@ function OfficeEmployees(props) {
             var Empsdata = [];
             querySnapshot.forEach((doc) => {
                 var empsObj = {
+                    id: doc.data().id,
                     email: doc.data().email,
                     fname: doc.data().fname,
                     mname: doc.data().mname,
@@ -40,7 +41,7 @@ function OfficeEmployees(props) {
                     contactNumber: doc.data().contactNumber,
                     jobtitle: doc.data().jobtitle,
                     birthdate: doc.data().birthdate.toDate(),
-                    encodedBy: doc.data().encodedBy,
+                    encodedBY: doc.data().encodedBY,
                     status: doc.data().status
                 }
                 Empsdata.push(empsObj);
@@ -57,7 +58,7 @@ function OfficeEmployees(props) {
     const columns = useMemo(() => OfficeEmployeeColumn, []);
     const rowEvents = {
         onDoubleClick: (e, row) => {
-           console.log(row);   
+           //console.log(row);   
            props.getSelectedOfficeEmp(row);
             history.push('/officeEmpInfo');
         }
@@ -126,7 +127,7 @@ function OfficeEmployees(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return{
         courierID: state.courier.courierId,
     }

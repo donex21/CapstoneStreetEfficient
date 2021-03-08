@@ -16,3 +16,34 @@
 .searchOfEmp {
   margin: 15px 0 5px 0;
 }
+
+.OEI-header {
+  margin: 20px 0;
+}
+
+.OEI-header {
+  width: 70%;
+}
+
+.editstyle {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.editstyle:hover {
+  color: blue;
+}
+
+.OEI-detail {
+  width: 100%;
+  border: none;
+  background: rgba(57, 129, 229, 0.2);
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.no-drsubmit {
+  display: none;
+}
