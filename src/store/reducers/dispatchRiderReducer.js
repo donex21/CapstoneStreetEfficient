@@ -3,7 +3,8 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const initstate = {
     add_DispatchRider_Error: null,
-    barangays: null
+    barangays: null,
+    selectedRidersEmp: null
 }
 
 toast.configure();
@@ -29,6 +30,19 @@ const dispatchRiderReducer = (state = initstate, action) => {
                     ...state,
                     barangays: action.barangays
                 } 
+
+        case 'GET_SELECTED_RIDERS_EMP':
+            return{
+                ...state,
+                selectedRidersEmp: action.riders
+            }
+
+        case 'UPDATE_RIDER_SUCCESS':
+            toast.success('Dispatch Rider Successfully Updated ')
+            return{
+                ...state,
+                selectedRidersEmp: action.rider
+            }
 
         default:
             return state

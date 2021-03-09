@@ -128,6 +128,7 @@ const EntryItems = (props) => {
             </Modal>
        )
     }
+    
     const onhandleChange = (e) => {
         setSearchInput(e.target.value)
         let newArray = item.filter((sinlgeItem) => {

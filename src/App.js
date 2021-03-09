@@ -21,6 +21,8 @@ import ItemPrint from './components/ItemPrint'
 import AssignRiderInItem from './components/AssignRiderInItem'
 import SelectAssignRider from './components/SelectAssignRider'
 import OfficeEmpInfo from './components/OfficeEmpInfo'
+import DispatchRiderInfo from './components/DispatchRiderInfo'
+import UpdateRiderInfo from './components/UpdateRiderInfo'
 
 export class App extends Component {
 
@@ -49,6 +51,8 @@ export class App extends Component {
               <Route exact path = '/assignRiderInItem' component = {AssignRiderInItem} />
               <Route exact path = '/selectAssignRider' component = {SelectAssignRider} />
               <Route exact path = '/officeEmpInfo' component = {OfficeEmpInfo} />
+              <Route exact path = '/dispatchRiderInfo' component = {DispatchRiderInfo} />
+              <Route exact path = '/UpdateRiderInfo' component = {UpdateRiderInfo} />
             </Switch>
           
     

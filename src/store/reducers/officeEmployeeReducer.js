@@ -24,11 +24,11 @@ const officeEmployeeReducer = (state = initstate, action) => {
                 ...state,
                 addOffice_Emp_Error: 'Error'
             } 
-        case 'GET_SELECTED_OFFICE_EMP':
+         case 'GET_SELECTED_OFFICE_EMP':
             return{
                 ...state,
                 selectedOfficeEmp: action.emp
-            } 
+            }
         case 'UPDATE_EMP_SUCCESS':
             console.log('SUCCESSFULLY UPDATED')
             toast.success('Office Employee Sucessfully Updated')

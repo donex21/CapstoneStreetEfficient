@@ -51,3 +51,24 @@ export const SelectDesignateBarangay = (cityID) => {
         });
     }
 }
+
+export const getSelectedRiderEmp = (riders) => {
+    return (dispatch, getState) => {
+        dispatch( {type: 'GET_SELECTED_RIDERS_EMP', riders});
+    }
+}
+
+export const UpdateSelectedDispatchRider = (rider) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firestore = getFirebase().firestore();
+        firestore.collection("Dispatch Riders").doc(rider.id)
+        .update({
+           ...rider
+        }).then(() => {
+                dispatch({type: 'UPDATE_RIDER_SUCCESS', rider})
+            }).catch(() => {
+                // An error happened.
+                dispatch({type: 'UPDATE_RIDER_ERROR'})
+            });
+    }
+}

@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 import {UpdateSelectedOfficeEmp} from '../store/actions/officeEmployeeAction'
+import {calculate_age} from './CustomsStyles'
 
 function OfficeEmpInfo(props) {
     const {singleEmp, auth}  = props;
@@ -44,18 +45,6 @@ function OfficeEmpInfo(props) {
         props.UpdateSelectedOfficeEmp(officeEmp)
     }
 
-    const calculate_age = (bdate) => {
-        var today = new Date();
-        var birthDate = new Date(bdate);  // create a date object directly from `dob1` argument
-        var age_now = today.getFullYear() - birthDate.getFullYear();
-        var m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
-        {
-            age_now--;
-        }
-        console.log(age_now);
-        return age_now;
-    }
     return (
         <div className = "container empCntr">
             <div className = "row justify-content-md-center OEI-header">         
@@ -244,7 +233,7 @@ function OfficeEmpInfo(props) {
     )
 }
 const mapStateToProps = (state) => {
-    console.log(state)
+    //console.log(state)
     return{
         singleEmp: state.officeEmployees.selectedOfficeEmp,
         auth: state.firebase.auth

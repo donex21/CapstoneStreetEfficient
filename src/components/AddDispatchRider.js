@@ -11,7 +11,7 @@ import Switch from 'react-switch'
 import { connect } from 'react-redux'
 
 const AddDispatchRider = (props) => {
-    const {branches, courierID, auth, barangays, add_dispatchrider_Error} = props
+    const {branches, courierID, auth, barangays} = props
     const [checked, setChecked] = useState(false)//for status
     let displayName = auth.displayName;
     let encodedBY = displayName.split("@");
@@ -46,33 +46,6 @@ const AddDispatchRider = (props) => {
         // eslint-disable-next-line
     }, [checked]);
 
-    // useEffect(() => {
-    //     if (!add_dispatchrider_Error){
-    //         setAddDispatchRider({
-    //             fname : '',
-    //             mname :'',
-    //             lname :'',
-    //             email : '',
-    //             address: '',
-    //             contactNumber: '',
-    //             emerg_number: '',
-    //             birthdate: null,
-    //             gender: 'Male',
-    //             branch: '',
-    //             status: 'inactive',
-    //             courier_id: courierID,
-    //             encodedBY: encodedBY[1],
-    //             vehicle_type: 'Motorcycle',
-    //             cR : null,
-    //             oR: null,
-    //             license: null,
-    //             writtenExam: null,
-    //             actualAssessment: null
-    //         });
-    //         setChecked(false);
-    //         imageInputRef.current.value = null;
-    //     } // eslint-disable-next-line
-    // }, [add_dispatchrider_Error])
 
     const handleOnChange = (e) =>{
         setAddDispatchRider({...addDispatchRider, [e.target.name]: e.target.value})
@@ -327,8 +300,7 @@ const AddDispatchRider = (props) => {
                                 <input type="file" 
                                     name="actualAssessment"                        
                                     required    
-                                    onChange ={handleCredsOnChange}   
-                                                      
+                                    onChange ={handleCredsOnChange}                                                      
                                 />
                              </div>
                       
