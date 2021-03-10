@@ -4,6 +4,9 @@ import { useHistory } from 'react-router'
 import {calculate_age} from './CustomsStyles'
 import moment from 'moment'
 import { Modal, Button } from 'react-bootstrap';
+import RiderPerformance from './RiderPerformance'
+import RiderDeliveryHistory from './RiderDeliveryHistory'
+
 
 function DispatchRiderInfo(props) {
     const {ridersEmp}  = props;
@@ -183,11 +186,14 @@ function DispatchRiderInfo(props) {
             <hr/>
             <div className="row">
                 <h2 >Performance</h2> 
+               
             </div>
+            <RiderPerformance riderID = {ridersEmp.id}/>
             <hr/>
             <div className="row">
-                <h2 >Delivery History</h2> 
+                <h2 >Delivery History</h2>
             </div>
+            <RiderDeliveryHistory riderID = {ridersEmp.id}/>
             <hr/>
             <div className="row btn-cntr">
                 <div className = "col col-sm-4">

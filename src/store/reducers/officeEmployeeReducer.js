@@ -37,6 +37,14 @@ const officeEmployeeReducer = (state = initstate, action) => {
                 selectedOfficeEmp: action.singleEmp
             } 
 
+        case 'UPDATE_NEWEMAIL_SUCCESS':
+            toast.success('Email Sucessfully Updated')
+            return state
+
+        case 'UPDATE_NEWEMAIL_ERROR':
+            toast.error('Email Update Error') 
+            return state
+
         default:
             return state
     }

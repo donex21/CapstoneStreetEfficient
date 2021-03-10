@@ -55,3 +55,26 @@ export const UpdateSelectedOfficeEmp = (singleEmp) => {
             });
     }
 }
+
+export const updateNewEmail = (newEmail) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        const firestore = getFirebase().firestore();
+        const user = firebase.auth().currentUser;
+
+
+        user.updateEmail(newEmail).then(() => {
+            // Update successful.
+            firestore.collection("Office_Employees").doc(user.uid).update({email : newEmail})
+            .then(() => {
+                dispatch({type: 'UPDATE_NEWEMAIL_SUCCESS'})
+            }).catch(() => {
+                // An error happened.
+                dispatch({type: 'UPDATE_NEWEMAIL_ERROR'})
+            });         
+          }).catch(() => {
+            // An error happened.
+            dispatch({type: 'UPDATE_NEWEMAIL_ERROR'})
+          });
+    }
+}

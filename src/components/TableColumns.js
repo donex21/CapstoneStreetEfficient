@@ -5,7 +5,17 @@ export const AssignRiderColumns = [
     {dataField: "itemSendername", text: "Sender Name", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
     {dataField: "itemSenderContactNumber", text: "Sender Phone", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
     {dataField: "itemCOD", text: "COD Price", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
-    {dataField: "date_encoded" ,text: "Date Entry", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}, sort: true}
+    {dataField: "date_encoded" ,text: "Date Entry", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}, sort: true,
+        sortFunc: (a, b, order, dataField, rowA, rowB) => { 
+            if (order === 'asc')
+            {
+            return Date.parse(a) - Date.parse(b)
+            }
+        else if (order === 'desc') {
+            return  Date.parse(b) - Date.parse(a) 
+            }
+        }
+    }
 ]
 
 export const DispatchRidersAssign = [
