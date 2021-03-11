@@ -41,3 +41,23 @@ export const OfficeEmployeeColumn = [
     {dataField: "status", text: "Status", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
 ]
 
+export const RiderItemsColumns = [
+    {dataField: "item_id", text: "Item ID", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+    {dataField: "itemRecipientname", text: "Recipient Name", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'} },
+    {dataField: "itemRecipientContactNumber", text: "Recipient Phone", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'} },
+    {dataField: "itemSendername", text: "Sender Name", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+    {dataField: "itemSenderContactNumber", text: "Sender Phone", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+    {dataField: "itemCOD", text: "COD Price", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+    {dataField: "del_date_sched" ,text: "Delivered Date", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}, sort: true,
+        sortFunc: (a, b, order, dataField, rowA, rowB) => { 
+            if (order === 'asc')
+            {
+            return Date.parse(a) - Date.parse(b)
+            }
+        else if (order === 'desc') {
+            return  Date.parse(b) - Date.parse(a) 
+            }
+        }
+    }
+]
+

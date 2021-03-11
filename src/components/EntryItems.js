@@ -12,7 +12,7 @@ const EntryItems = (props) => {
     const {courierID, courBranch} = props;
     const [item , setItem] = useState([]);
     const [loading , setLoading] = useState(false);
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('Choose Category');
     const [filterItems, setFilterItems] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [modalInfo, setModalInfo] = useState([]);
@@ -82,6 +82,7 @@ const EntryItems = (props) => {
     const toggleTrueFalse = () => {
         setShowModal(handleShow);
     };
+
 
     const ModalContent = () =>{
         return (
