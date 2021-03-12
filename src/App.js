@@ -23,6 +23,7 @@ import SelectAssignRider from './components/SelectAssignRider'
 import OfficeEmpInfo from './components/OfficeEmpInfo'
 import DispatchRiderInfo from './components/DispatchRiderInfo'
 import UpdateRiderInfo from './components/UpdateRiderInfo'
+import SplashScreen from './components/SplashScreen'
 
 export class App extends Component {
 
@@ -30,7 +31,7 @@ export class App extends Component {
   render() {
     const {auth, newUser} = this.props;
     const withnavhead = auth.uid && !newUser && <NavigationHeader/>
-    const link = auth.uid ? Home : Courierlogin
+    const link = auth.uid ? SplashScreen : Courierlogin
     return (
       <div className = "app-main">
          {withnavhead} 

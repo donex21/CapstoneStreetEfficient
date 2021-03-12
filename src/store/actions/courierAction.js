@@ -39,6 +39,7 @@
             var users_jobtitle = [];
             var users_fname = [];
             var users_lname =[];
+            var users_branch = [];
 
           firestore.collection("Office_Employees")
           .where("email", "==", emailPwd.email)
@@ -54,6 +55,7 @@
                         users_jobtitle.push(doc.data().jobtitle);
                         users_fname.push(doc.data().fname);
                         users_lname.push(doc.data().lname);
+                        users_branch.push(doc.data().branch)
                     });
    
                     let useremail = users_email[0];
@@ -61,15 +63,17 @@
                     let userjobtitle = users_jobtitle[0];
                     let userfname = users_fname[0];
                     let userlname = users_lname[0];
+                    let userbranch = users_branch[0];
+
 
                         firebase.auth().signInWithEmailAndPassword(useremail, userpassword)
                         .then(() => {
                             firebase.auth().currentUser.updateProfile({displayName: userjobtitle + '@'+ userfname + ' ' + userlname});
                             if(userpassword === 'admin123')
                             {
-                                dispatch({ type: 'NEW_USER_LOGIN'});
+                                dispatch({ type: 'NEW_USER_LOGIN', userbranch});
                             }else{
-                                dispatch({ type: 'LOGIN_SUCCESS'});
+                                dispatch({ type: 'LOGIN_SUCCESS', userbranch});
                             }
                         })
                         .catch(() => {                   

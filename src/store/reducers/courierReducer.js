@@ -36,6 +36,7 @@ const courierReducer = (state = initstate, action) => {
             return {
                 ...state,
                 userError: null,
+                courBranch: action.userbranch
             }
 
         case 'NEW_USER_LOGIN':
@@ -43,7 +44,8 @@ const courierReducer = (state = initstate, action) => {
             return {
                 ...state,
                 userError: null,
-                newuser: true
+                newuser: true,
+                courBranch: action.userbranch
             }
 
         case 'SIGNOUT_SUCCESS':

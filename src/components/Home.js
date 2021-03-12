@@ -1,79 +1,90 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux' 
-//import fire from '../config/fbConfig'
 
 import {getCourierID} from '../store/actions/courierAction';
+import CourierName from './CourierName';
+import TotalBranchDispatchRider from './TotalBranchDispatchRider';
+import TotalBranchItem from './TotalBranchItem';
+import TotalBranchOfficeEmployees from './TotalBranchOfficeEmployees';
+import TotalUnassignedItemBranch from './TotalUnassignedItemBranch';
 
 function Home(props) {
-    // const logout= () =>{
-    //     fire.auth().signOut();
-    //     window.location.href = '/'
-    // }
+    const { courierID,courBranch } = props;
+    // const authid = auth.uid;
+    // useEffect(() => {        
+    //     props.getCourierID(authid);    
+    // }, [])
 
-    const { auth } = props;
-    const authid = auth.uid;
-    useEffect(() => {
-            props.getCourierID(authid);    
-            // eslint-disable-next-line     
-    }, [])
     
     return (
-        <div>
-            Home
-            {/* <button onClick={logout}>Logout</button> */}
+        <div className = "container main-cntr">
+            <CourierName  courierID = {courierID}/>
+            <div className = "row">
+                <div className = "col-sm-10">
+                    <div className = "row cardHomeMargin">
+                        <div className = "col-sm-6">
+                            <TotalUnassignedItemBranch courierID = {courierID} courBranch = {courBranch}  />
+                        </div>
+                        <div className = "col-sm-6">
+                             <TotalBranchItem courierID = {courierID} courBranch = {courBranch}/>
+                        </div>
+                    </div>
+                    <div className = "row">
+                        <div className = "col-sm-6">
+                            <TotalBranchDispatchRider courierID = {courierID} courBranch = {courBranch} />
+                        </div>
+                        <div className = "col-sm-6">
+                            <TotalBranchOfficeEmployees courierID = {courierID} courBranch = {courBranch} />
+                        </div>                        
+                    </div>
+                </div>
+                <div className = "col-sm-2">
+                    <h3>Attempt Container</h3>
+                </div>
+            </div>        
         </div>
     )
 }
-//export default Home
 const mapStateToProps = (state) =>{
-    //console.log(state)
+    console.log(state)
     return{
-        auth: state.firebase.auth,
+        // auth: state.firebase.auth,
         courierID: state.courier.courierId,
         courBranch: state.courier.courBranch,
     }
 }
 
-const mapDispatchToProps = (dispatch) =>{
-    return{    
-       getCourierID: (authUid) => dispatch(getCourierID(authUid))
-    }
-}
+// const mapDispatchToProps = (dispatch) =>{
+//     return{    
+//        getCourierID: (authUid) => dispatch(getCourierID(authUid))
+//     }
+// }
 
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps ),
-    firestoreConnect((props) => [
-        {
-            collection: 'Office_Employees',
-            where: [
-                ['courier_id', '==', props.courierID],
-                ['branch', '==', props.courBranch]
-            ]
-        },
-
-        {
-            collection: 'Branch',
-            where: [
-                ['Courier_id', '==', props.courierID],
-                ['status', '==', 'active']
-            ]
-        },
-        {
-            collection: 'Items',
-            where: [
-                ['courier_id', '==', props.courierID],
-                ['itemRecipientBranch', '==', props.courBranch]
-            ]
-        },
-        // {
-        //     collection: 'Dispatch Riders',
-        //     where: [
-        //         ['courier_id', '==', props.courierID],
-        //         ['branch', '==', props.courBranch]
-        //     ]
-        // },
-
-    ])
-) (Home)
+export default compose( connect(mapStateToProps),
+// firestoreConnect((props) => [
+//     {
+//         collection: 'Office_Employees',
+//         where: [
+//             ['courier_id', '==', props.courierID],
+//             ['branch', '==', props.courBranch]
+//         ]
+//     },
+//     {
+//         collection: 'Branch',
+//         where: [
+//             ['Courier_id', '==', props.courierID],
+//             ['status', '==', 'active']
+//         ]
+//     },
+//     {
+//         collection: 'Items',
+//         where: [
+//             ['courier_id', '==', props.courierID],
+//             ['itemRecipientBranch', '==', props.courBranch]
+//         ]
+//     },
+// ])
+)
+(Home)

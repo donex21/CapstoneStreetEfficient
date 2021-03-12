@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -7,6 +8,8 @@ import { connect } from 'react-redux';
 import fire from '../config/fbConfig'
 
 function NavigatioHeader(props) {
+
+    const history = useHistory();
 
     const { auth } = props;
    
@@ -39,7 +42,7 @@ function NavigatioHeader(props) {
     }
     return (
         <nav className = "navBarItems">
-        <div className = "headerLogo" onClick = {() => window.location.href = '/'}>
+        <div className = "headerLogo" onClick = {() => history.push('/')}> 
             <img src="/images/navlogo.png" alt= "logo" height = "50px" width = "300px"/>
         </div>
         <div className = "headerMenu">
