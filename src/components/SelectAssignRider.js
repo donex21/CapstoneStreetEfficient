@@ -31,6 +31,7 @@ const SelectAssignRider = (props) => {
         del_date_sched: null,
         item_weight: item.itemweight,
         itemRecipientContactNumber: item.itemRecipientContactNumber,
+        rider_name: null
     });
 
     const columns = useMemo(() => DispatchRidersAssign, []);
@@ -38,6 +39,7 @@ const SelectAssignRider = (props) => {
         onClick: (e, row) => {
             //console.log(row.id);   
             setItemDel({...itemDel, rider_id: row.id})
+            setItemDel({...itemDel, rider_name: row.fname + " " + row.mname + " " + row.lname})
             setDRName(row.fname + " " + row.mname + " " + row.lname)
         }
     }

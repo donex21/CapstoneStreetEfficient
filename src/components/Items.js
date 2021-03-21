@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AllItems from './AllItems';
 import DeliveredItems from './DeliveredItems';
 import EntryItems from './EntryItems';
 import ReturnedItems from './ReturnedItems';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-function Items() {
+toast.configure();
+function Items(props) {
+    const {auth} = props
+    let displayName = auth.displayName;
+    let jobtitle = displayName.split("@");
     const history = useHistory();
     const [changesidebar, setChangesidebar] = useState();
     console.log(changesidebar)
@@ -14,8 +21,14 @@ function Items() {
         sidebar = <DeliveredItems/>
     else if(changesidebar === 'ReturnedItems')
         sidebar = <ReturnedItems/>
-    else if(changesidebar === 'AllItems')
-        sidebar = <AllItems/>
+    else if(changesidebar === 'AllItems'){
+        if(jobtitle[0] === "Manager"){
+            sidebar = <AllItems/>
+        }else{
+            toast.warning('Only the Manager can Access this page'); 
+            sidebar = <EntryItems/>;
+        }
+    }
     else
         sidebar = <EntryItems/>
     return (
@@ -54,4 +67,11 @@ function Items() {
     )   
 }
 
-export default Items
+const mapStateToProps = (state) =>{
+    //console.log(state)
+    return{
+        auth: state.firebase.auth
+    }
+  }
+
+export default connect(mapStateToProps) (Items)

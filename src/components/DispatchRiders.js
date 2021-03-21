@@ -4,10 +4,13 @@ import { connect } from 'react-redux';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import fire from '../config/fbConfig' 
 import { OfficeEmployeeColumn } from './TableColumns';
 import { getSelectedRiderEmp } from '../store/actions/dispatchRiderAction'
 
+toast.configure();
 const DispatchRiders = (props) => {
     const{courierID} = props;
     const history  = useHistory();
@@ -16,6 +19,7 @@ const DispatchRiders = (props) => {
     const [category, setCategory] = useState('');
     const [filterItems, setFilterItems] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const [riders_limit, setRidersLimit] = useState(false);
     
     const ref = fire.firestore().collection("Dispatch Riders").where("courier_id", "==", courierID);
 
@@ -23,6 +27,7 @@ const DispatchRiders = (props) => {
         setLoading(true);
         ref.get().then((querySnapshot) => {
             var ridersdata = [];
+            var totalRiderInputted = 0;
             querySnapshot.forEach((doc) => {
                 var riderObj = {
                     id: doc.data().id,
@@ -47,7 +52,19 @@ const DispatchRiders = (props) => {
                     writtenExam: doc.data().writtenExam
                 }
                 ridersdata.push(riderObj);
+                totalRiderInputted += 1;
             });
+
+            var docRef = fire.firestore().collection("Couriers_Company").doc(courierID);
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    //console.log("Document data:", doc.data());
+                    //courRidersLimit = parseInt(doc.data().ridersMaxLimit);
+                    if(totalRiderInputted === parseInt(doc.data().ridersMaxLimit)){
+                        setRidersLimit(true);
+                    }
+                } 
+            });           
             setRiderEmp(ridersdata)
             setLoading(false)
         });
@@ -97,7 +114,7 @@ const DispatchRiders = (props) => {
     return (
         <div className = "container-fluid empCntr">
             <div className = "empfirstrow">
-                <button className="btn-openModal btn-primary" onClick = {() => history.push('/addDispatchRiders')}>Add Dispatch Rider</button>
+                <button className="btn-openModal btn-primary" onClick = {() => { riders_limit ? toast.warning('You exceed in the maximum limit of riders..Please upgrade your package Plan') : history.push('/addDispatchRiders')}}>Add Dispatch Rider</button>
                 
                 <div className = "d-flex justify-content-center searchOfEmp">
                     <input  value = {searchInput} onChange = {onhandleChange} type = "text" placeholder ="Seacrh for...." className= "searchOfAssignRiderItem"></input>

@@ -55,7 +55,7 @@ export const getBranchBarangays = (courBranch) => {
     }
 }
 
-
+///Delivery_header initialized in SelectAssignRider.js
 export const addItemDel = (itemDel) => {
     return (dispatch, getState, {getFirebase}) => {
         const firestore = getFirebase().firestore();

@@ -167,7 +167,7 @@ const EntryItems = (props) => {
                     <input value = {searchInput} onChange = {onhandleChange} type = "text" placeholder ="Seacrh for...." className= "searchOfAssignRiderItem"></input>
                     
                     <select value = {category}  onChange = {(e) => setCategory(e.target.value)}> 
-                        <option value="" disabled selected hidden>Choose Category...</option>
+                        <option value="">Choose Category...</option>
                         <option value = "Item ID">Item ID</option>
                         <option value = "Recipient Name">Recipient Name</option>
                         <option value = "Sender Name">Sender Name</option>
