@@ -81,4 +81,11 @@ export const ReturnedItemsColumns = [
     }
 ]
 
+export const DeliveryAttempColumns = [
+    {dataField: "id", text: "Item ID", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}, sort: true},
+    {dataField: "item_counter", text: "Attempt", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)',
+        width: '80px'
+        }, sort: true},
+]
+
 

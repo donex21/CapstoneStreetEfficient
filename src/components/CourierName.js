@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebase from '../config/fbConfig'
+import RingLoader from "react-spinners/RingLoader";
 
 const CourierName =  (props) => {
     const {courierID} = props;
@@ -22,7 +23,7 @@ const CourierName =  (props) => {
     }, [])
 
     if(loading){
-        return <p>loading....</p>
+        return <RingLoader size = {30} color = {'#1D927A'} loading = {loading}/>
     }
 
     return (

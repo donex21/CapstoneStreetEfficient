@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import fire from '../config/fbConfig' 
+import RingLoader from "react-spinners/RingLoader";
 
 const TotalUnassignedItemBranch = (props) => {
     const { courierID, courBranch} = props;
@@ -29,7 +30,7 @@ const TotalUnassignedItemBranch = (props) => {
     }, []);
 
     if(loading){
-        return <p>Loading...</p>
+        return <RingLoader size = {30} color = {'#1D927A'} loading = {loading}/>
     }
     return (
         <div className ="card cardcolor">

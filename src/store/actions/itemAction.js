@@ -75,3 +75,37 @@ export const addItemDel = (itemDel) => {
     }
 } 
 
+export const updateReturnItem = (item_id) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firestore = getFirebase().firestore();
+
+        firestore.collection("Items").doc(item_id).update({
+            "status": "returned"});
+        dispatch({type: 'RETURNED_ITEM_UPDATE_SUCCESS' });
+    }
+}
+
+export const updateReschedItem = (itemDel) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firestore = getFirebase().firestore();
+        firestore.collection("Delivery_Header").where("item_id", "==", itemDel.item_id).get()
+        .then(querySnapshot => {
+            var IDs = [];       
+            querySnapshot.forEach(doc => {
+                //console.log(doc.id, " => ", doc.data());
+                IDs.push(doc.id)
+            });
+            let id = IDs[0];
+            firestore.collection("Delivery_Header").doc(id).update(
+                {"del_date_sched": itemDel.del_date_sched,
+                "del_date_sched_string":  moment(itemDel.del_date_sched).format('LL').toString()
+            });
+
+            firestore.collection("Delivery_Attempt").doc(itemDel.item_id).update({
+                "status": "reschedule"});
+
+            dispatch({type: 'RESCHEDULE_ITEM_SUCCESS' });
+        });
+    }
+}
+

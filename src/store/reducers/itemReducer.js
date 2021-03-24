@@ -49,6 +49,14 @@ const itemReducer = (state = initstate, action) => {
                 getbarangays: action.barangays
             }
 
+        case 'RETURNED_ITEM_UPDATE_SUCCESS':
+            toast.success('The Item will be returned to Sender')
+            return state
+
+        case 'RESCHEDULE_ITEM_SUCCESS':
+            toast.success('The Item Rescheduled Succesfully')
+            return state
+
         default:
             return state
     }

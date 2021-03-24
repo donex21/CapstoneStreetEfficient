@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import {firestoreConnect} from 'react-redux-firebase'
-import {compose} from 'redux' 
 
-import {getCourierID} from '../store/actions/courierAction';
+import AttemptContainer from './AttemptContainer';
 import CourierName from './CourierName';
 import TotalBranchDispatchRider from './TotalBranchDispatchRider';
 import TotalBranchItem from './TotalBranchItem';
@@ -11,18 +9,12 @@ import TotalBranchOfficeEmployees from './TotalBranchOfficeEmployees';
 import TotalUnassignedItemBranch from './TotalUnassignedItemBranch';
 
 function Home(props) {
-    const { courierID,courBranch } = props;
-    // const authid = auth.uid;
-    // useEffect(() => {        
-    //     props.getCourierID(authid);    
-    // }, [])
-
-    
+    const { courierID,courBranch } = props;  
     return (
         <div className = "container main-cntr">
             <CourierName  courierID = {courierID}/>
             <div className = "row">
-                <div className = "col-sm-10">
+                <div className = "col-sm-9">
                     <div className = "row cardHomeMargin">
                         <div className = "col-sm-6">
                             <TotalUnassignedItemBranch courierID = {courierID} courBranch = {courBranch}  />
@@ -40,8 +32,8 @@ function Home(props) {
                         </div>                        
                     </div>
                 </div>
-                <div className = "col-sm-2">
-                    <h3>Attempt Container</h3>
+                <div className = "col-sm-3">
+                    <AttemptContainer />
                 </div>
             </div>        
         </div>
@@ -50,41 +42,10 @@ function Home(props) {
 const mapStateToProps = (state) =>{
     console.log(state)
     return{
-        // auth: state.firebase.auth,
         courierID: state.courier.courierId,
         courBranch: state.courier.courBranch,
     }
 }
 
-// const mapDispatchToProps = (dispatch) =>{
-//     return{    
-//        getCourierID: (authUid) => dispatch(getCourierID(authUid))
-//     }
-// }
 
-export default compose( connect(mapStateToProps),
-// firestoreConnect((props) => [
-//     {
-//         collection: 'Office_Employees',
-//         where: [
-//             ['courier_id', '==', props.courierID],
-//             ['branch', '==', props.courBranch]
-//         ]
-//     },
-//     {
-//         collection: 'Branch',
-//         where: [
-//             ['Courier_id', '==', props.courierID],
-//             ['status', '==', 'active']
-//         ]
-//     },
-//     {
-//         collection: 'Items',
-//         where: [
-//             ['courier_id', '==', props.courierID],
-//             ['itemRecipientBranch', '==', props.courBranch]
-//         ]
-//     },
-// ])
-)
-(Home)
+export default connect(mapStateToProps)(Home)
