@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import fire from '../config/fbConfig' 
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 import { Icon } from 'leaflet';
+import { connect } from 'react-redux';
 
 export const icon = new Icon({
     iconUrl: '/images/sfhelmet.png',
@@ -9,48 +10,20 @@ export const icon = new Icon({
   });
 
 
-function RidersMap() {
+function RidersMap(props) {
+    const {courierID} = props
     const [riders , setRiders] = useState([]);
     const [loading , setLoading] = useState(false);
     //const [ridersdata, setRidersdata] = useState();
     
-    const ref = fire.firestore().collection("DispatchRiders_Position")
+    const ref = fire.firestore().collection("DispatchRiders_Position").where("courier_id", "==", courierID)
     function getRiderLocation(){
        setLoading(true); 
         ref.onSnapshot((querySnapshot) => {  
                 var riderdata= [];   
                      
                 querySnapshot.forEach((doc) => {  
-                    riderdata.push(doc.data());
-                    // var rider_id = doc.data().rider_id;
-                    // var latitude = doc.data().latitude;
-                    // var longitude = doc.data().longitude;
-                    // var riderObj = [];
-                    // var docRef = fire.firestore().collection("Dispatch Riders").doc(rider_id);
-                    // docRef.get().then((doc) => {
-                    //     if (doc.exists) {
-                    //         riderObj.push({
-                    //             fname: doc.data().fname,
-                    //             lname: doc.data().lname,
-                    //             mname: doc.data().mname,
-                    //             contactNumber: doc.data().contactNumber,
-                    //             vehicle_type: doc.data().vehicle_type,
-                    //         });
-                            
-                            // riderdata.push(riderObj);           
-                            // setRiderdata(riderdata =>[...riderdata, {
-                            //     rider_id,
-                            //     latitude ,
-                            //     longitude,
-                            //     fname: doc.data().fname,
-                            //     lname: doc.data().lname,
-                            //     mname: doc.data().mname,
-                            //     contactNumber: doc.data().contactNumber,
-                            //     vehicle_type: doc.data().vehicle_type,
-                            // }]);                          
-                    //     } 
-                    // });  
-                    // riderdata.push({rider_id, latitude, longitude)                                                
+                    riderdata.push(doc.data());                                              
                 });
                
                 setRiders(riderdata);
@@ -66,7 +39,6 @@ function RidersMap() {
         return <p>loading.....</p>
     }
     
-    console.log(riders);
 
     return (
         <MapContainer center={[10.3321, 123.9357]} zoom={12}>
@@ -101,5 +73,11 @@ function RidersMap() {
     )
 }
 
-export default RidersMap
+const mapStateToProps = (state) => {
+    return{
+        courierID: state.courier.courierId,
+    }
+}
+
+export default connect(mapStateToProps)(RidersMap)
 
