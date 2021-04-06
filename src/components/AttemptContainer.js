@@ -88,21 +88,22 @@ const AttemptContainer = (props) => {
 
     const handleSubmitReschedItems = (e) =>{
         e.preventDefault();
-
-        for( var i = 0; i < item.length; i++){ 
+        if(itemDel.del_date_sched != null){
+            for( var i = 0; i < item.length; i++){ 
     
-            if ( item[i].id === itemDel.item_id) { 
-        
-                item.splice(i, 1); 
+                if ( item[i].id === itemDel.item_id) { 
+            
+                    item.splice(i, 1); 
+                }
             }
+            handleClose();
+            setResched(!resched);
+            props.updateReschedItem(itemDel);
+            setItemDel({
+                del_date_sched: null,
+                item_id: null,
+            });
         }
-        handleClose();
-        setResched(!resched);
-        props.updateReschedItem(itemDel);
-        setItemDel({
-            del_date_sched: null,
-            item_id: null,
-        });
     }
 
     const handleCancel = (e) => {

@@ -54,36 +54,46 @@ const DeliveredItems = (props) => {
                 var docRef = fire.firestore().collection("Delivery_Header").where("item_id", "==", item_id);
                 docRef.get()
                 .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {                    
-                        var itemObj = {
-                            item_id : item_id,  
-                            itemSendername : itemSendername,
-                            itemSenderContactNumber: itemSenderContactNumber,
-                            itemSenderAddressStreet: itemSenderAddressStreet,
-                            itemSenderAddressBarangay: itemSenderAddressBarangay,
-                            itemSenderAddressCity: itemSenderAddressCity,
-                            itemSenderAddressProvince: itemSenderAddressProvince,
-                            itemRecipientname: itemRecipientname, 
-                            itemRecipientContactNumber: itemRecipientContactNumber,
-                            itemRecipientAddressStreet: itemRecipientAddressStreet,
-                            itemRecipientAddressBarangay: itemRecipientAddressBarangay,
-                            itemRecipientAddressCity: itemRecipientAddressCity,
-                            itemRecipientAddressProvince: itemRecipientAddressProvince,
-                            itemRecipientBranch: itemRecipientBranch,
-                            itemSenderBranch: itemSenderBranch,
-                            itemqty: itemqty,
-                            itemweight: itemweight,
-                            itemCOD: itemCOD,
-                            courier_id: courier_id,
-                            status: status,
-                            encodedBy: encodedBy,
-                            date_encoded: date_encoded,
-                            assignedby: doc.data().assignedby, // check if no assigned rider it should be returned into NA
-                            rider_name: doc.data().rider_name,
-                            date_assigned: moment(doc.data().date_assigned.toDate()).format('LL').toString(),
-                            del_date_sched: moment(doc.data().del_date_sched.toDate()).format('LL').toString(),
-                        }                               
-                        setItem((item) => [...item, itemObj])    
+                    querySnapshot.forEach((doc) => {                      
+                        var docRef2 = fire.firestore().collection("Delivery_Detail").where("del_item_id", "==", doc.id);
+                        docRef2.get()
+                        .then((querySnapshot) => {
+                            var deldate = [];
+                            querySnapshot.forEach((doc) => {
+                                  deldate.push(moment(doc.data().date.toDate()).format('LLL').toString());
+                            }); 
+                            var itemObj = {
+                                item_id : item_id,   
+                                itemSendername : itemSendername,
+                                itemSenderContactNumber: itemSenderContactNumber,
+                                itemSenderAddressStreet: itemSenderAddressStreet,
+                                itemSenderAddressBarangay: itemSenderAddressBarangay,
+                                itemSenderAddressCity: itemSenderAddressCity,
+                                itemSenderAddressProvince: itemSenderAddressProvince,
+                                itemRecipientname: itemRecipientname, 
+                                itemRecipientContactNumber: itemRecipientContactNumber,
+                                itemRecipientAddressStreet: itemRecipientAddressStreet,
+                                itemRecipientAddressBarangay: itemRecipientAddressBarangay,
+                                itemRecipientAddressCity: itemRecipientAddressCity,
+                                itemRecipientAddressProvince: itemRecipientAddressProvince,
+                                itemRecipientBranch: itemRecipientBranch,
+                                itemSenderBranch: itemSenderBranch,
+                                itemqty: itemqty,
+                                itemweight: itemweight,
+                                itemCOD: itemCOD,
+                                courier_id: courier_id,
+                                status: status,
+                                encodedBy: encodedBy,
+                                date_encoded: date_encoded,
+                                assignedby: doc.data().assignedby, // check if no assigned rider it should be returned into NA
+                                rider_name: doc.data().rider_name,
+                                date_assigned: moment(doc.data().date_assigned.toDate()).format('LL').toString(),
+                                //del_date_sched: moment(doc.data().del_date_sched.toDate()).format('LL').toString(),
+                                del_date_sched: deldate[0],
+                            }
+                            setItem((item) => [...item, itemObj]) 
+                        });                        
+       
                     });
                 });
             });

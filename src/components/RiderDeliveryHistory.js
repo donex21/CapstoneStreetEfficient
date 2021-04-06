@@ -106,7 +106,7 @@ const RiderDeliveryHistory = (props) => {
     if(loading){
         return <p>loading.....</p>
     }
-    console.log(item)
+   //console.log(item)
     return (
         <div className = "container">
             <div className = "ARtable">

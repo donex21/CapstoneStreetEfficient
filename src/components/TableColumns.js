@@ -88,4 +88,10 @@ export const DeliveryAttempColumns = [
         }, sort: true},
 ]
 
+export const PerformanceColumns = [
+    {dataField: "date", text: "Date", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}, sort: true},
+    {dataField: "score", text: "Score", headerStyle: { backgroundColor: 'rgba(57,129,229, 0.5)'}},
+]
+
+
 
