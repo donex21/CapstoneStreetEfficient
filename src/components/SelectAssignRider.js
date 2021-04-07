@@ -37,10 +37,9 @@ const SelectAssignRider = (props) => {
     const columns = useMemo(() => DispatchRidersAssign, []);
     const rowEvents = {
         onClick: (e, row) => {
-            //console.log(row.id);   
-            setItemDel({...itemDel, rider_id: row.id})
-            setItemDel({...itemDel, rider_name: row.fname + " " + row.mname + " " + row.lname})
-            setDRName(row.fname + " " + row.mname + " " + row.lname)
+            console.log(row.id);   
+            setItemDel({...itemDel, rider_name: row.fname + " " + row.mname + " " + row.lname, rider_id: row.id});
+            setDRName(row.fname + " " + row.mname + " " + row.lname);
         }
     }
 
@@ -54,7 +53,7 @@ const SelectAssignRider = (props) => {
         e.preventDefault();
         itemDel.del_date_sched ? setShowRiderList(true): setShowRiderList(false) 
         setDRName('')
-        setItemDel({...itemDel, rider_id: ''})
+        setItemDel({...itemDel, rider_id: null})
     }
 
     const [selectedbrgy, setSelectedBrgy] = useState(item.itemRecipientAddressBarangay);
@@ -104,7 +103,7 @@ const SelectAssignRider = (props) => {
     },[itemDel.del_date_sched])
 
 
-   // console.log(dispatchRiders)
+    console.log(itemDel)
 
     const onSelectChange = (e) => {
         setSelectedBrgy(e.target.value);
@@ -125,7 +124,7 @@ const SelectAssignRider = (props) => {
         }
     }
 
-    //console.log(item.item_id)
+    //console.log(itemDel.rider_id)
     return (
         <div className = "container main-cntr" >
             <div className = "row justify-content-md-center">
