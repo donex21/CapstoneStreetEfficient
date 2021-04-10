@@ -12,7 +12,7 @@ const AddItem = (props) => {
     let displayName = auth.displayName;
     let encodedBY = displayName.split("@");
     const [addItem, setAddItem] = useState({
-        item_id: getRandomString(12),
+        item_id: getRandomString(12),   
         itemSendername: '',
         itemSenderContactNumber: '',
         itemSenderAddressStreet: '',

@@ -27,7 +27,7 @@ const SelectAssignRider = (props) => {
         item_id: item.item_id,
         rider_id: null,
         assignedby: assignedBY[1],
-        date_assigned: new Date(),
+        date_assigned: new Date(),  
         del_date_sched: null,
         item_weight: item.itemweight,
         itemRecipientContactNumber: item.itemRecipientContactNumber,

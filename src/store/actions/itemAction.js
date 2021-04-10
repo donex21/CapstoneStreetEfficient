@@ -68,6 +68,13 @@ export const addItemDel = (itemDel) => {
         }).then(() => {
             firestore.collection("Items").doc(itemDel.item_id).update({
                 "status": "assigned"});
+                let recipientCN = itemDel.itemRecipientContactNumber + "";
+                let recipient = recipientCN.slice(1, recipientCN.length);
+                let textmessage = "Your Item will be scheduled deliver on "+ moment(itemDel.del_date_sched).format('LL').toString();
+
+                fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${textmessage}`)
+                .catch(err => console.error(err))
+
               dispatch({type: 'ADD_ITEM_DEL_SUCCESS' });
           }).catch( () => {
               dispatch( {type: 'ADD_ITEM_DEL_ERROR' });
