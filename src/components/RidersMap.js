@@ -11,12 +11,12 @@ export const icon = new Icon({
 
 
 function RidersMap(props) {
-    const {courierID} = props
+    const {courierID, courBranch} = props
     const [riders , setRiders] = useState([]);
     const [loading , setLoading] = useState(false);
     //const [ridersdata, setRidersdata] = useState();
     
-    const ref = fire.firestore().collection("DispatchRiders_Position").where("courier_id", "==", courierID)
+    const ref = fire.firestore().collection("DispatchRiders_Position").where("courier_id", "==", courierID).where("branch", "==", courBranch).where("status", "==", true);
     function getRiderLocation(){
        setLoading(true); 
         ref.onSnapshot((querySnapshot) => {  
@@ -39,7 +39,7 @@ function RidersMap(props) {
         return <p>loading.....</p>
     }
     
-
+    console.log(riders);
     return (
         <MapContainer center={[10.3321, 123.9357]} zoom={12}>
             <TileLayer
@@ -62,6 +62,8 @@ function RidersMap(props) {
                                 Phone: {rider.rider_contactNumber}
                                 <br/>
                                 Vehicle Type: {rider.vehicle_type}
+                                <br/>
+                                Destination: {rider.destination}
                             </p>
                         </div>
                     </Popup>
@@ -76,6 +78,7 @@ function RidersMap(props) {
 const mapStateToProps = (state) => {
     return{
         courierID: state.courier.courierId,
+        courBranch: state.courier.courBranch,
     }
 }
 

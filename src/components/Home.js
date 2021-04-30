@@ -4,6 +4,7 @@ import fire from '../config/fbConfig'
 
 import AttemptContainer from './AttemptContainer';
 import CourierName from './CourierName';
+import TodaysDeliverySched from './TodaysDeliverySched';
 import TotalBranchDispatchRider from './TotalBranchDispatchRider';
 import TotalBranchItem from './TotalBranchItem';
 import TotalBranchOfficeEmployees from './TotalBranchOfficeEmployees';
@@ -13,12 +14,14 @@ function Home(props) {
     const { courierID,courBranch } = props; 
     const [loading , setLoading] = useState(false);
     const ref = fire.firestore().collection("Items").where("courier_id", "==", courierID).where("itemRecipientBranch", "==", courBranch).where("status", "==", "assigned");
+    var tempDate = new Date();
+    var currentDate = new Date (tempDate.getUTCFullYear(), tempDate.getUTCMonth(), tempDate.getUTCDate());
     function reAssignItems(){
         setLoading(true);
         ref.get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 var item_id =  doc.data().item_id;
-                const docref = fire.firestore().collection("Delivery_Header").where("item_id", "==", item_id).where("del_date_sched", "<", new Date())
+                const docref = fire.firestore().collection("Delivery_Header").where("item_id", "==", item_id).where("del_date_sched", "<", currentDate)
                 docref.get().then((querySnapshot1) => {
                     querySnapshot1.forEach((doc1) => {
                         var del_item_id = doc1.data().del_item_id;
@@ -48,6 +51,7 @@ function Home(props) {
         });
     }
 
+  //console.log(currentDate)
     useEffect(() => {
         reAssignItems();
     }, [])
@@ -79,7 +83,9 @@ function Home(props) {
                 <div className = "col-sm-3">
                     <AttemptContainer />
                 </div>
-            </div>        
+            </div>    
+            <hr></hr>   
+            <TodaysDeliverySched /> 
         </div>
     )
 }

@@ -56,7 +56,7 @@ export const getBranchBarangays = (courBranch) => {
 }
 
 ///Delivery_header initialized in SelectAssignRider.js
-export const addItemDel = (itemDel) => {
+export const addItemDel = (itemDel, courName) => {
     return (dispatch, getState, {getFirebase}) => {
         const firestore = getFirebase().firestore();
 
@@ -70,7 +70,7 @@ export const addItemDel = (itemDel) => {
                 "status": "assigned"});
                 let recipientCN = itemDel.itemRecipientContactNumber + "";
                 let recipient = recipientCN.slice(1, recipientCN.length);
-                let textmessage = "Your Item will be scheduled deliver on "+ moment(itemDel.del_date_sched).format('LL').toString();
+                let textmessage = "Hi Good Day! This is "+ courName +". Your Item will be scheduled deliver on "+ moment(itemDel.del_date_sched).format('LL').toString();
 
                 fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${textmessage}`)
                 .catch(err => console.error(err))

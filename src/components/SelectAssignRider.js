@@ -17,7 +17,7 @@ toast.configure();
 
 const SelectAssignRider = (props) => {
     const history = useHistory();
-    const {item, auth, dispatchRiders, barangays} = props;   
+    const {item, auth, dispatchRiders, barangays, courierID} = props;   
     const [showRiderList, setShowRiderList] =useState(false);
     let displayName = auth.displayName;
     let assignedBY = displayName.split("@");
@@ -59,9 +59,18 @@ const SelectAssignRider = (props) => {
     const [selectedbrgy, setSelectedBrgy] = useState(item.itemRecipientAddressBarangay);
     const [newBrgy, setNewBrgy] = useState([]);
     const [bry, setbry] = useState([]);
+    const [courName, setCourName] = useState('');
 
     function firstFilterBrgy () {
-        let riderslist = [] 
+        let riderslist = [];
+
+        var docRefCourName = fire.firestore().collection("Couriers_Company").doc(courierID);
+        docRefCourName.get().then((doc) => {
+            if (doc.exists) {
+                setCourName(doc.data().Courier_Name);  
+            }
+        });
+
         dispatchRiders && dispatchRiders.map((rider, index) =>{           
             let counter = 0;
             let weightSum = 0;
@@ -103,7 +112,7 @@ const SelectAssignRider = (props) => {
     },[itemDel.del_date_sched])
 
 
-    console.log(itemDel)
+    //console.log(itemDel)
 
     const onSelectChange = (e) => {
         setSelectedBrgy(e.target.value);
@@ -117,7 +126,7 @@ const SelectAssignRider = (props) => {
     const onHandleSubmit = (e) =>{
         e.preventDefault();
         if(itemDel.rider_id && itemDel.del_date_sched){
-           props.addItemDel(itemDel)
+           props.addItemDel(itemDel, courName)
            history.push('/assignRiderInItem')
         }else {
             toast.error('Pls.. Select Delivery Date Schedule / Dispatch Rider')
@@ -234,13 +243,14 @@ const mapStateToProps = (state) =>{
        item: state.items.selectedUnAssignedItems,
        auth: state.firebase.auth,
        dispatchRiders: state.firestore.ordered["Dispatch Riders"],
-       barangays: state.items.getbarangays
+       barangays: state.items.getbarangays,
+       courierID: state.courier.courierId,
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        addItemDel: (itemDel) => dispatch(addItemDel(itemDel)),
+        addItemDel: (itemDel, courName) => dispatch(addItemDel(itemDel, courName)),
     }
 }
  export default connect(mapStateToProps, mapDispatchToProps) (SelectAssignRider)

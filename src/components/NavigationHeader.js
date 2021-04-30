@@ -6,6 +6,10 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 import { connect } from 'react-redux';
 import fire from '../config/fbConfig'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+toast.configure();
 
 function NavigatioHeader(props) {
 
@@ -40,6 +44,8 @@ function NavigatioHeader(props) {
         fire.auth().signOut();
         window.location.href = '/'   
     }
+
+   
     return (
         <nav className = "navBarItems">
         <div className = "headerLogo" onClick = {() => history.push('/')}> 

@@ -59,8 +59,10 @@ const DeliveredItems = (props) => {
                         docRef2.get()
                         .then((querySnapshot) => {
                             var deldate = [];
+                            var signature = [];
                             querySnapshot.forEach((doc) => {
                                   deldate.push(moment(doc.data().date.toDate()).format('LLL').toString());
+                                  signature.push(doc.data().signature);
                             }); 
                             var itemObj = {
                                 item_id : item_id,   
@@ -90,6 +92,7 @@ const DeliveredItems = (props) => {
                                 date_assigned: moment(doc.data().date_assigned.toDate()).format('LL').toString(),
                                 //del_date_sched: moment(doc.data().del_date_sched.toDate()).format('LL').toString(),
                                 del_date_sched: deldate[0],
+                                signature: signature[0],
                             }
                             setItem((item) => [...item, itemObj]) 
                         });                        
@@ -163,6 +166,8 @@ const DeliveredItems = (props) => {
                         <ol>Assigned Dispatch Rider: {modalInfo.rider_name}</ol>
                         <ol>Item Status: {modalInfo.status}</ol>
                     </ul>
+                    <h5>Recieved Recipient Signature.</h5>
+                    <img width ="300" height ="200" src= {modalInfo.signature} alt = "signature"/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant = "secondary" onClick = {handleClose}>

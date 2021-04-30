@@ -15,7 +15,7 @@ const RiderPerformance = (props) => {
     const {riderID} = props;
     const [searchDate, setSearchDate] = useState();
     const [dayScore , setDayScore] = useState([]);
-    const [overallScore, setOverallScore] = useState(); 
+    const [overallScore, setOverallScore] = useState(0); 
     const [loading , setLoading] = useState(false);
     const [filterDate, setFilterDate] = useState([]);
     const [searchOn, setSearchOn] = useState(false);
@@ -23,8 +23,9 @@ const RiderPerformance = (props) => {
     const ref = fire.firestore().collection("Route_Header").where("rider_id", "==", riderID);
     const ref1  = fire.firestore().collection("Performance").doc(riderID)
     function getPerformannce(){
-        setLoading(true)
+        setLoading(true);
         setDayScore([]);
+       
         ref1.get().then((doc) => {
             if (doc.exists) {
                setOverallScore(parseFloat(doc.data().average_score).toFixed(2))
@@ -85,11 +86,70 @@ const RiderPerformance = (props) => {
         return <p>loading.....</p>
     }
 
+    console.log(overallScore);
+    const Classification = () =>{
+        let score = overallScore;
+        if(score >= 81){
+            return(
+                <h2 className = "excellent"> Excellent </h2>
+            )
+        }else if(score < 81 && score >= 61){
+            return(
+                <h2 className = "above_ave"> Above Average </h2>
+            )
+        }else if(score < 61 && score >= 41){
+            return(
+                <h2 className = "average"> Average </h2>
+            )
+        }else if(score < 41 && score >= 21){
+            return(
+                <h2 className = "below_ave"> Below Average </h2>
+            )
+        }else{
+            return(
+                <h2 className = "poor"> Poor </h2>
+            )
+        }
+    }
+
+    const Display_score = () =>{
+        let score = overallScore;
+        if(score >= 81){
+            return(
+                <h2 className = "excellent"> {overallScore} </h2>
+            )
+        }else if(score < 81 && score >= 61){
+            return(
+                <h2 className = "above_ave"> {overallScore} </h2>
+            )
+        }else if(score < 61 && score >= 41){
+            return(
+                <h2 className = "average"> {overallScore} </h2>
+            )
+        }else if(score < 41 && score >= 21){
+            return(
+                <h2 className = "below_ave"> {overallScore} </h2>
+            )
+        }else{
+            return(
+                <h2 className = "poor"> {overallScore} </h2>
+            )
+        }
+    }
+
     return (
         <div className = "container">
             <div>
-                <h5><u>Overall Score</u></h5>
-                <h2>{overallScore}</h2>
+                <div className = "row">
+                    <div className = "col">
+                        <h5><u>Overall Score</u></h5>
+                        <Display_score />
+                    </div>
+                    <div className = "col">
+                        <h5><u>Classification</u></h5>
+                        <Classification />
+                    </div>
+                </div>
             </div>
             <div className = "ARtable">      
                 <div className = "input-group ">
