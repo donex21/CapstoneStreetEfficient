@@ -4,10 +4,12 @@ import fire from '../config/fbConfig'
 
 import AttemptContainer from './AttemptContainer';
 import CourierName from './CourierName';
+import LowestPerformanceRiders from './LowestPerformanceRiders';
 import TodaysDeliverySched from './TodaysDeliverySched';
 import TotalBranchDispatchRider from './TotalBranchDispatchRider';
 import TotalBranchItem from './TotalBranchItem';
 import TotalBranchOfficeEmployees from './TotalBranchOfficeEmployees';
+import { TotalDelivered } from './TotalDelivered';
 import TotalUnassignedItemBranch from './TotalUnassignedItemBranch';
 
 function Home(props) {
@@ -25,7 +27,7 @@ function Home(props) {
                 docref.get().then((querySnapshot1) => {
                     querySnapshot1.forEach((doc1) => {
                         var del_item_id = doc1.data().del_item_id;
-                        const docref2 = fire.firestore().collection("Delivery_Attempt").where("id", "==", item_id).where('status', 'array-contains-any', ['back_to_warehouse', 'delivered']);
+                        const docref2 = fire.firestore().collection("Delivery_Attempt").where("id", "==", item_id).where("status", "==", "back_to_warehouse");
                         docref2.get().then((querySnapshot2) => {
                             if(querySnapshot2.empty){
                                 fire.firestore().collection("Delivery_Header").doc(del_item_id).delete().then(() => {
@@ -41,7 +43,7 @@ function Home(props) {
                                 fire.firestore().collection("Items").doc(item_id).update({
                                     "status": "unassigned"});
                             }else{
-                                console.log("not empty");
+                                console.log("empty");
                             }
                         });
                     });
@@ -71,12 +73,20 @@ function Home(props) {
                              <TotalBranchItem courierID = {courierID} courBranch = {courBranch}/>
                         </div>
                     </div>
-                    <div className = "row">
+                    <div className = "row cardHomeMargin ">
                         <div className = "col-sm-6">
                             <TotalBranchDispatchRider courierID = {courierID} courBranch = {courBranch} />
                         </div>
                         <div className = "col-sm-6">
                             <TotalBranchOfficeEmployees courierID = {courierID} courBranch = {courBranch} />
+                        </div>                        
+                    </div>
+                    <div className = "row">
+                        <div className = "col-sm-6">
+                            <TotalDelivered courierID = {courierID} courBranch = {courBranch} />
+                        </div>
+                        <div className = "col-sm-6">
+                            <LowestPerformanceRiders courierID = {courierID} courBranch = {courBranch} />
                         </div>                        
                     </div>
                 </div>
