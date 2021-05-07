@@ -62,7 +62,7 @@ function Home(props) {
     }
     return (
         <div className = "container main-cntr">
-            <CourierName  courierID = {courierID}/>
+            <CourierName  courierID = {courierID} courBranch = {courBranch}/>
             <div className = "row">
                 <div className = "col-sm-9">
                     <div className = "row cardHomeMargin">

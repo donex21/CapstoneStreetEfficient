@@ -3,7 +3,7 @@ import firebase from '../config/fbConfig'
 import RingLoader from "react-spinners/RingLoader";
 
 const CourierName =  (props) => {
-    const {courierID} = props;
+    const {courierID, courBranch} = props;
     const [courName, setCourName] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -28,7 +28,7 @@ const CourierName =  (props) => {
 
     return (
         <div className = "d-flex justify-content-center headerCourName">
-            <h2>{courName}</h2>
+            <h2>{courName} {courBranch} Branch</h2>
         </div>
     )
 }
